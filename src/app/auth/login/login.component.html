@@ -1,0 +1,46 @@
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card-auth">
+          <div class="text-center">
+            <img src="../../../assets/logo.svg" alt="logo" class="w-50">
+          </div>
+          <h2>Log In</h2>
+          <p class="text-second">Welcome Back! Please Enter Your Details</p>
+
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-mobile-screen"></i></span>
+              <input formControlName="email" type="text" class="form-control" placeholder="Enter Your Email"
+                aria-label="email" aria-describedby="basic-addon1">
+
+                <div class="alert text-danger p-0" *ngIf="loginForm.controls.email.errors && loginForm.controls.email.touched">
+                  <p *ngIf="loginForm.get('email')?.getError('required')">Email Is Required</p>
+                  <p *ngIf="loginForm.get('email')?.getError('email')">Email Is Invalid</p>
+                </div>
+              
+            </div>
+            
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+              <input formControlName="password" type="password" class="form-control" placeholder="Enter Password"
+                aria-label="password" aria-describedby="basic-addon1">
+                <div class="alert text-danger" *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
+                  <p *ngIf="loginForm.get('password')?.getError('required')">Password Is Required</p>
+                  <p *ngIf="loginForm.get('password')?.getError('pattern')">Password Is Invalid</p>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between my-2">
+              <a class="text-second text-decoration-none">Register Now?</a>
+              <a class="text-main text-decoration-none">Forgot Password?</a>
+            </div>
+          </form>
+
+          <button [disabled]="loginForm.invalid" class="btn primary w-100">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
