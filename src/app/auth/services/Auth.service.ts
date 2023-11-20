@@ -15,7 +15,7 @@ onLogin(data:ILogin){
 }
 
 onRequestResetPassword(data:string){
-  return this.http.post('Reset/Request', {email: data})
+  return this.http.post('Users/Reset/Request', {email: data})
 }
 
 ontResetPassword(data:IReset){
