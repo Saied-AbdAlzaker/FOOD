@@ -1,7 +1,10 @@
+import { RequestResetPasswordComponent } from './../request-reset-password/request-reset-password.component';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/Auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _AuthService:AuthService, private toastr:ToastrService) { }
+  constructor(private _AuthService:AuthService,
+     private toastr:ToastrService, 
+     public dialog: MatDialog,
+     private router:Router) { }
 
   loginForm = new FormGroup({
     email: new FormControl(null,[Validators.required,Validators.email]),
@@ -18,20 +24,55 @@ export class LoginComponent implements OnInit {
   })
 
   onSubmit(data: FormGroup){
-    console.log(data);
     this._AuthService.onLogin(data.value).subscribe({
-      next: (res)=> {
+      next: (res: any)=> {
+        this.errorMessage = res.message;
         console.log(res);
-        
+        this.router.navigate(['/admin'])
       }, error: (err: any)=> {
         console.log(err);
-        this.toastr.error('Hello world!', 'Toastr fun!');
+        this.toastr.error(err.message, 'Error!');
         
       } , complete: ()=> {
-        this.toastr.success('Hello world!', 'Toastr fun!');
+        this.toastr.success(this.errorMessage, 'Successfully!');
       }
     })
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RequestResetPasswordComponent, {
+      data: { },
+      width: '40%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.onRquestReset(result);
+    });
+
+  }
+
+  errorMessage:string='';
+  onRquestReset(data: string){
+    // let dataObj = {
+    //   email: data
+    // }
+    
+    this._AuthService.onRequestResetPassword(data).subscribe({
+      next: (res: any)=>{
+        this.errorMessage = res.message;
+      }, error: (err)=>{
+        this.toastr.error(err.error.message, 'Error!');
+      },complete: ()=>{
+        this.toastr.success(this.errorMessage, 'Successfully!');
+        this.router.navigate(['/auth/resetPassword']);
+        localStorage.setItem('email' , data);
+      }
+    })
+  }
+
+  hide:boolean = true;
+  
 
   ngOnInit() {
     

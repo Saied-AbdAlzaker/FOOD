@@ -19,9 +19,9 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ToastrModule.forRoot({
       closeButton: true,
-      timeOut: 10000,
+      // timeOut: 500,
       progressBar: true,
-      positionClass: 'toast-center-right',
+      // positionClass: 'toast-center-right',
     }), // ToastrModule added
   ],
   providers: [

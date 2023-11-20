@@ -59,6 +59,23 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
     color: #494949;
   }
 
+  a{
+    cursor: pointer;
+  }
+
+  .eye-icon{
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    z-index: 100;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    cursor: pointer;
+}
+
   button {
     border: none;
     border-radius: 8px;
@@ -103,3 +120,4 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
 .bg-second {
   background-color: #F7F7F7 !important;
 }
+

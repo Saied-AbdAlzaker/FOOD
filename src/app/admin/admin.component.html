@@ -1,3 +1,75 @@
-<p>
-  admin works!
-</p>
+<div class="row h-100">
+    <div class="col-md-3 side">
+        <div class="side-nav-menu  d-flex justify-content-between">
+            <div class="nav-tab h-100 p-4">
+                <div class="links overflow-hidden">
+                    <img src="../../assets/logo-admin.png" alt="logo-admin" class="w-75 mb-5">
+                    <ul class="list-unstyled">
+                        <li class="py-2"><i class="fa-solid fa-house me-3"></i>Home</li>
+                        <li class="py-2"><i class="fa-solid fa-user-group me-3"></i>Users</li>
+                        <li class="py-2"><img src="../../assets/recipes.svg" class="me-3">Recipes</li>
+                        <li class="py-2"><img src="../../assets/categories.svg" class="me-3">Categories</li>
+                        <li class="py-2"><i class="fa-solid fa-unlock-keyhole me-3"></i>Change Password</li>
+                        <li class="py-2"><i class="fa-solid fa-right-from-bracket me-3"></i>Logout</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex w-75" role="search">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i
+                                    class="fa-solid fa-magnifying-glass"></i></span>
+                            <input formControlName="search" type="text" class="form-control" placeholder="Search Here"
+                                aria-label="search" aria-describedby="basic-addon1">
+                        </div>
+                    </form>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown d-flex justify-content-center mx-2">
+                            <img src="../../assets/logo-search.png" class="img-search">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                UpSkilling
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <img src="../../assets/message-icon.svg">
+                </div>
+            </div>
+        </nav>
+
+        <div class="box-text p-3">
+            <div class="d-flex justify-content-center align-content-center">
+                <div class="text-white m-auto p-5">
+                    <h2 class="fw-bold mb-2">Welcome <span class="span-text fw-light">Upskilling!</span></h2>
+                    <p>This is a welcoming screen for the entry of the application , <br>
+                        you can now see the options</p>
+                </div>
+                <img src="../../assets/photo-box.png" alt="photo-box">
+            </div>
+        </div>
+
+        <div class="box-text-two p-5 mt-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2 class="fw-bold mb-2 text-color">Fill the <span class="span-text-two fw-light">Recipes !</span></h2>
+                    <p class="text-color">you can now fill the meals easily using the table and form , <br>
+                         click here and sill it with the table !</p>
+                </div>
+                <button class="bg-btn form-control w-25 ">Fill Recipes <i class="fa-solid fa-arrow-right-long text-white mx-2"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
