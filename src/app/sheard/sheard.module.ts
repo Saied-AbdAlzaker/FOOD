@@ -1,3 +1,4 @@
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { SheardComponent } from './sheard.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,15 +13,23 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+const routes: Routes = []
 
 @NgModule({
   imports: [
     CommonModule,
     MatButtonModule, MatDividerModule, MatIconModule,HttpClientModule,ReactiveFormsModule,
-    FormsModule,MatDialogModule,ToastrModule],
-  declarations: [SheardComponent],
+    FormsModule,MatDialogModule,ToastrModule, MatPaginatorModule,
+    RouterModule.forChild(routes)],
+  declarations: [SheardComponent, NavbarComponent, SidebarComponent, HomeComponent, DeleteDialogComponent],
   exports:[ MatButtonModule, MatDividerModule, MatIconModule,HttpClientModule, ReactiveFormsModule,
-    FormsModule,MatDialogModule,ToastrModule]
+    FormsModule,MatDialogModule,ToastrModule, NavbarComponent, SidebarComponent, RouterModule, HomeComponent, MatPaginatorModule, DeleteDialogComponent]
 })
 export class SheardModule { }
 

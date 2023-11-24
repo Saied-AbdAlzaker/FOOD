@@ -1,0 +1,35 @@
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="px-0 bgDark sideBar vh-100" [ngClass]="isOpened?'col-2':'col-1'">
+                <div>
+                    <div class="text-center my-3" (click)="isOpened = !isOpened">
+                        <img src="../../../assets/images/logo-admin.png" alt="logo" class="w-50" >
+                    </div>
+                    <ng-container *ngFor="let item of menu">
+                        <a [routerLink]="item.link" *ngIf="item.isActive" class="text-decoration-none bgActive d-block">
+                            <div class="item text-white ">
+                                <span><i [class]="item.icon" [ngClass]="{'fa-2x':  !isOpened}"></i></span>
+                                <span class="mx-3" [ngClass]="{'d-none': !isOpened}">{{item.title}}</span>
+                            </div>
+                        </a>
+                    </ng-container>
+                    
+                    <div class="item text-white bgActive brdr">
+                        <span><i class="fa-solid fa-unlock-keyhole" [ngClass]="{'fa-2x':  !isOpened}"></i></span>
+                        <span class="mx-3" [ngClass]="{'d-none': !isOpened}" (click)="openDialog()">Change Password</span>
+                    </div>
+                    <div class="item text-white bgActive">
+                        <span><i class="fa-solid fa-arrow-right-from-bracket" [ngClass]="{'fa-2x':  !isOpened}" (click)="logout()"></i></span>
+                        <span class="mx-3" [ngClass]="{'d-none': !isOpened}" (click)="logout()">Logout</span>
+                    </div>
+                </div>
+            </div>
+            <div [ngClass]="isOpened?'col-10':'col-11'">
+                <app-navbar></app-navbar>
+
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</section>

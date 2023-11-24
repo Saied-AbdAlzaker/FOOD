@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { AuthComponent } from './auth.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
   {path:'login',component:LoginComponent},
   {path:'resetPassword',component:ResetPasswordComponent},
+  {path:'changePassword',component:ChangePasswordComponent},
 ];
 
 
@@ -20,6 +22,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SheardModule
   ],
-  declarations: [AuthComponent,LoginComponent,ResetPasswordComponent,RequestResetPasswordComponent]
+  declarations: [AuthComponent,LoginComponent,ResetPasswordComponent,RequestResetPasswordComponent, ChangePasswordComponent]
 })
 export class AuthModule { }

@@ -115,9 +115,25 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
 
 .bg-main {
   background-color: #4AA35A !important;
+
+}
+.bgDark {
+  background-color: #1F263E;
 }
 
 .bg-second {
   background-color: #F7F7F7 !important;
 }
 
+#page-header{
+  background-image: url(../src/assets/images/header-bg-svg.svg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+  color: #fff;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+}

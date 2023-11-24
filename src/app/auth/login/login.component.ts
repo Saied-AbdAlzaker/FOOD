@@ -23,18 +23,21 @@ export class LoginComponent implements OnInit {
     password: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
   })
 
+  Message:string='';
   onSubmit(data: FormGroup){
     this._AuthService.onLogin(data.value).subscribe({
       next: (res: any)=> {
-        this.errorMessage = res.message;
-        console.log(res);
-        this.router.navigate(['/admin'])
+        this.Message = res.message;
+        
+        localStorage.setItem('userToken',res.token);
+        this._AuthService.getProfile();
       }, error: (err: any)=> {
         console.log(err);
-        this.toastr.error(err.message, 'Error!');
+        this.toastr.error(err.error.message, 'Error!');
         
       } , complete: ()=> {
-        this.toastr.success(this.errorMessage, 'Successfully!');
+        this.router.navigate(['/dashboard'])
+        this.toastr.success('Logged In', 'Successfully!');
       }
     })
   }

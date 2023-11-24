@@ -4,3 +4,9 @@ export interface IReset {
     confirmPassword: "string",
     seed: "string"
 }
+
+export interface IChange {
+    oldPassword: "string",
+    newPassword: "string",
+    confirmNewPassword: "string"
+}

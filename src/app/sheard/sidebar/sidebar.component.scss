@@ -1,0 +1,25 @@
+.sideBar{
+    border-top-right-radius: 58px;
+}
+.item{
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+.bgActive:hover{
+    background-color: rgba(0, 146, 71, 0.1) !important;
+    // .brdr{
+    //     border-left: 2px solid red;
+    // }
+  }
+ 
+  .row > div{
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+}
