@@ -17,8 +17,16 @@ addCategories(data:any): Observable<any>{
   return this._HttpClient.post('Category' , {name: data})
 }
 
+// viewCategories(data:any): Observable<any>{
+//   return this._HttpClient.get('Category' , {params: data})
+// }
+
 deleteCategories(id:number): Observable<any>{
   return this._HttpClient.delete(`Category/${id}`)
+}
+
+editCategories(id:number , data:string): Observable<any>{
+  return this._HttpClient.put(`Category/${id}` , {params: data})
 }
 
 }

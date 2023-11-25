@@ -40,7 +40,22 @@
           <td>{{item.name}}</td>
           <td>{{item.creationDate | date: 'dd-MM-yyyy , hh:mm:a'}}</td>
           <td>{{item.modificationDate | date: 'dd-MM-yyyy , hh:mm:a'}}</td>
-          <td><a (click)="openDeleteDialog(item)" class="text-danger"><i class="fa-solid fa-trash-can "></i></a></td>
+          <td class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <!-- <i class="fa-solid fa-ellipsis" style="color: #1f5141;"></i> -->
+              <img src="../../../assets//images/list-group.svg" alt="">
+            </a>
+            <ul class="dropdown-menu">
+              <div class="d-flex flex-column align-items-center">
+          <td><a (click)="openViewDialog(item)" class="text-success text-decoration-none cursor"><i
+                class="fa-regular fa-eye mx-2"></i>View</a></td>
+          <td><a (click)="openEditDialog(item)" class="text-info text-decoration-none cursor"><i
+                class="fa-solid fa-pen-to-square mx-2"></i>Edit</a></td>
+          <td><a (click)="openDeleteDialog(item)" class="text-danger text-decoration-none cursor"><i
+                class="fa-solid fa-trash-can mx-2"></i>Delete</a></td>
+          </div>
+          </ul>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -58,4 +73,10 @@
 
     </div>
   </div>
+
+  <div class="text-center" *ngIf="loading">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 </section>

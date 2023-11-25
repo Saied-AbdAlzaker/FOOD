@@ -1,0 +1,23 @@
+<div class="card-auth p-5">
+  <h4 class="d-flex align-items-center justify-content-between mb-5">
+      <span (click)="onNoClick()"><i class="fa-solid fa-xmark" style="color: #f00a0a;"></i></span>
+  </h4>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category Date</th>
+        <th>Modification Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableData">
+        <td>{{item.name}}</td>
+        <td>{{item.creationDate }}</td>
+        <td>{{item.modificationDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
