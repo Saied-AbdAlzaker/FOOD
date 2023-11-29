@@ -1,13 +1,53 @@
-<div class="card-auth p-5">
-  <h4 class="d-flex align-items-center justify-content-between mb-5">
-      <span>Add Recipes</span>
-      <span (click)="onNoClick()"><i class="fa-solid fa-xmark" style="color: #f00a0a;"></i></span>
-  </h4>
+<section class="container">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm)">
+    <div class="row card-auth shadow-sm">
+      <div class="col-md-10 mx-auto">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-user"></i></span>
+          <input formControlName="name" type="text" class="form-control" placeholder="Recipe Name" aria-label="recipe"
+            aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-sack-dollar"></i></span>
+          <input formControlName="price" type="number" class="form-control" placeholder="Price" aria-label="price"
+            aria-describedby="basic-addon1">
+        </div>
+        <label for="">Tag</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-tags"></i></span>
+          <select formControlName="tagId" class="form-select" aria-label="Default select example">
+            <option selected>All</option>
+            <option *ngFor="let item of tags" [ngValue]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+        <label for="">Category</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-table-cells"></i></span>
+          <select formControlName="categoriesIds" class="form-select" aria-label="Default select example">
+            <option selected>All</option>
+            <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-marker"></i></span>
+          <textarea formControlName="description" type="text" class="form-control" placeholder="Description"
+            aria-label="description" aria-describedby="basic-addon1"> </textarea>
+        </div>
 
-  <div class="input-group mb-3">
-      <input [(ngModel)]="recipesName" type="text" class="form-control" placeholder="Recipes Name"
-          aria-label="email" aria-describedby="basic-addon1">
-  </div>
+        <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+          <ngx-dropzone-label>
+            <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+          Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+          </ngx-dropzone-label>
+          <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+            [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-image-preview>
+        </ngx-dropzone>
 
-  <button [mat-dialog-close]="recipesName" cdkFocusInitial class="btn bg-main text-white w-100">Save</button>
-</div>
+        <button [routerLink]="['/dashboard/admin/recipes']" type="button" class="outline-primary m-2">Cancel</button>
+        <button class="primary my-2">Save</button>
+      </div>
+    </div>
+  </form>
+</section>

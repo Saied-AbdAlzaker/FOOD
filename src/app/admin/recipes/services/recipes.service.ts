@@ -14,16 +14,16 @@ export class RecipesService {
   }
   
   addRecipes(data:any): Observable<any>{
-    return this._HttpClient.post('Recipe' , {name: data})
+    return this._HttpClient.post('Recipe' , data)
   }
   
   deleteRecipes(id:number): Observable<any>{
     return this._HttpClient.delete(`Recipe/${id}`)
   }
   
-  // editRecipes(id:number , data:string): Observable<any>{
-  //   return this._HttpClient.put(`Category/${id}` , {params: data})
-  // }
+  editRecipes(id:number , data:string): Observable<any>{
+    return this._HttpClient.put(`Category/${id}` , {params: data})
+  }
   
 
 }

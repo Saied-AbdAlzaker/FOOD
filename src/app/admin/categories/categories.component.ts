@@ -143,7 +143,7 @@ export class CategoriesComponent implements OnInit {
 openViewDialog(categoryData: any): void {
   const dialogRef = this.dialog.open(ViewCategoryComponent, {
     data: categoryData,
-    width: '80%',
+    width: '60%',
   });
 
   dialogRef.afterClosed().subscribe(result => {

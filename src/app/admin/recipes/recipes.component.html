@@ -24,16 +24,29 @@
         </div>
       </div>
       <div class="col-md-4">
-        <button class="btn primary" (click)="openAddDialog()">Add New Item</button>
+        <button [routerLink]="['/dashboard/admin/recipes/add']" class="btn primary" >Add New Item</button>
       </div>
-      <div class="col-md-8">
-        <div class="w-100 my-3">
-          <input [(ngModel)]="searchValue" (keyup)="getTableData()" type="text" placeholder="Search Here...."
-           class="form-control rounded" >
-        </div>
+      <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input [(ngModel)]="searchValue" (keyup)="getTableData()" type="text" placeholder="Search Here...."
+            class="form-control rounded">
       </div>
-      <div class="col-md-4">
         
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="tagId" (change)="getTableData()" class="form-select" aria-label="Default select example">
+          <option selected>All</option>
+          <option *ngFor="let item of tags" [value]="item.id">{{item.name}}</option>
+        </select>
+        <!-- <h2>{{tagId}}</h2> -->
+      </div>
+      <div class="col-md-3">
+        <select [(ngModel)]="categories" (change)="getTableData()" class="form-select" aria-label="Default select example">
+          <option selected>All</option>
+          <option *ngFor="let item of categories" [value]="item.id">{{item.name}}</option>
+        </select>
+        <!-- <h2>{{tagId}}</h2> -->
       </div>
     </div>
     <table class="table table-striped">
@@ -51,11 +64,13 @@
       <tbody>
         <tr *ngFor="let item of tableData">
           <td>{{item.name}}</td>
-          <td><img [src]="'http://upskilling-egypt.com:3002/'+item.imagePath" alt=""></td>
+          <td class="w-25 rounded-2"><img [src]="'https://upskilling-egypt.com:443/'+item.imagePath" alt="" class="w-50" ></td>
           <td>{{item.price}}</td>
           <td>{{item.description}}</td>
-          <td>{{item}}</td>
-          <!-- <td *ngFor="let item of items">{{item.category}}</td> -->
+          <td>{{item.tag.name}}</td>
+          <td>
+            <span *ngFor="let itemCategory of item.category">{{itemCategory.name}}</span>
+          </td>
           <!-- <td class="nav-item dropdown"> -->
             <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-ellipsis" style="color: #1f5141;"></i>
@@ -77,22 +92,15 @@
     </table>
 
     <div class="bg-info">
-      <!-- <mat-paginator #paginator
+      <mat-paginator #paginator
                class="demo-paginator"
                (page)="handlePageEvent($event)"
                [length]="tableResponse?.totalNumberOfRecords"
                [pageSize]="tableResponse?.pageSize"
-               [pageSizeOptions]="[5,10,25]"
+               [pageSizeOptions]="[5,10,15,20,25]"
                [pageIndex]="tableResponse?.pageNumber"
                aria-label="Select page">
-</mat-paginator> -->
-
+      </mat-paginator>
     </div>
   </div>
-
-  <div class="text-center" *ngIf="loading">
-    <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
 </section>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { ICategory, ICategoryTable } from '../../models/category';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-view-category',
@@ -9,12 +8,8 @@ import { ICategory, ICategoryTable } from '../../models/category';
 })
 export class ViewCategoryComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<ViewCategoryComponent>) {}
-
-  pageSize:number=10;
-  pageNumber:number | undefined = 1;
-  tableResponse:ICategoryTable | undefined;
-  tableData:ICategory[] | undefined = [];
+  constructor(public dialogRef: MatDialogRef<ViewCategoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   categoryName:string='';
 
