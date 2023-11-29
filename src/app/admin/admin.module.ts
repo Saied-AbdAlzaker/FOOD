@@ -1,6 +1,3 @@
-import { UserComponent } from './../user/user.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { RecipesComponent } from './recipes/recipes.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';

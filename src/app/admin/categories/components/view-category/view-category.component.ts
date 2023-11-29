@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ICategory, ICategoryTable } from '../../../models/category';
-
+import { ICategory, ICategoryTable } from '../../models/category';
 
 @Component({
   selector: 'app-view-category',

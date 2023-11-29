@@ -1,3 +1,98 @@
-<p>
-  recipes works!
-</p>
+<section id="page-header" class="px-5 my-3">
+  <div class="contauner">
+    <div class="row align-items-center">
+      <div class="col-9">
+        <h3>Recipes <span>Items</span></h3>
+        <p>You can now add your items that any user can order it from <br> the Application and you can edit</p>
+      </div>
+      <div class="col-3">
+        <div class="text-end">
+          <img src="../../../assets/images/category-avatar.svg" alt="category" class="w-75">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container py-4">
+    <div class="row py-3">
+      <div class="col-md-8">
+        <div>
+          <h5>Recipe Table Details</h5>
+          <p>You can check all details</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button class="btn primary" (click)="openAddDialog()">Add New Item</button>
+      </div>
+      <div class="col-md-8">
+        <div class="w-100 my-3">
+          <input [(ngModel)]="searchValue" (keyup)="getTableData()" type="text" placeholder="Search Here...."
+           class="form-control rounded" >
+        </div>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Tag</th>
+          <th>Category</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tableData">
+          <td>{{item.name}}</td>
+          <td><img [src]="'http://upskilling-egypt.com:3002/'+item.imagePath" alt=""></td>
+          <td>{{item.price}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item}}</td>
+          <!-- <td *ngFor="let item of items">{{item.category}}</td> -->
+          <!-- <td class="nav-item dropdown"> -->
+            <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-ellipsis" style="color: #1f5141;"></i>
+              <img src="../../../assets//images/list-group.svg" alt="">
+            </a> -->
+            <!-- <ul class="dropdown-menu">
+              <div class="d-flex flex-column align-items-center">
+          <td><a (click)="openViewDialog(item)" class="text-success text-decoration-none cursor"><i
+                class="fa-regular fa-eye mx-2"></i>View</a></td>
+          <td><a (click)="openEditDialog(item)" class="text-info text-decoration-none cursor"><i
+                class="fa-solid fa-pen-to-square mx-2"></i>Edit</a></td>
+          <td><a (click)="openDeleteDialog(item)" class="text-danger text-decoration-none cursor"><i
+                class="fa-solid fa-trash-can mx-2"></i>Delete</a></td>
+          </div>
+          </ul> -->
+          <!-- </td> -->
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="bg-info">
+      <!-- <mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="tableResponse?.totalNumberOfRecords"
+               [pageSize]="tableResponse?.pageSize"
+               [pageSizeOptions]="[5,10,25]"
+               [pageIndex]="tableResponse?.pageNumber"
+               aria-label="Select page">
+</mat-paginator> -->
+
+    </div>
+  </div>
+
+  <div class="text-center" *ngIf="loading">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+</section>

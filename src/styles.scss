@@ -141,3 +141,7 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
 .cursor{
   cursor: pointer;
 }
+
+.dropdown-toggle::after{
+  display: none;
+}

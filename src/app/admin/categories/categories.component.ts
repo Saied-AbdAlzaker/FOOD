@@ -4,9 +4,9 @@ import { PageEvent } from '@angular/material/paginator';
 import { ICategory, ICategoryTable } from './models/category';
 import { CategoryService } from './services/category.service';
 import { Component, OnInit } from '@angular/core';
-import { AddEditCategoryComponent } from './components/add-edit-category/add-edit-category.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ViewCategoryComponent } from './components/add-edit-category/view-category/view-category.component';
+import { AddEditCategoryComponent } from './components/add-edit-category/add-edit-category.component';
+import { ViewCategoryComponent } from './components/view-category/view-category.component';
 
 @Component({
   selector: 'app-categories',
@@ -23,8 +23,6 @@ export class CategoriesComponent implements OnInit {
   tableData:ICategory[] | undefined = [];
 
   searchValue:string = '';
-
-  loading:boolean=false;
 
   ngOnInit() {
     this.getTableData();
@@ -83,50 +81,24 @@ export class CategoriesComponent implements OnInit {
       })
 }
 
-  openViewDialog(categoryData: any): void {
-    const dialogRef = this.dialog.open(ViewCategoryComponent, {
-      data: categoryData,
-      width: '100%',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // console.log(result);
-      this.onAddNewCategory(result);
-    });
-  }
-//   onViewCategory(data: String){
-//     this._CategoryService.addCategories(data).subscribe({
-//       next: (res) => {
-//         console.log(res);
-//       }, error: (err)=>{
-//         console.log(err);
-//       }, complete: ()=>{
-//         this._ToastrService.success('Category Added Successfully', 'Ok');
-//         this.getTableData();
-//       }
-//       })
-// }
-
+// Edit
   openEditDialog(categoryData: any): void {
     const dialogRef = this.dialog.open(AddEditCategoryComponent, {
-      data: categoryData,
+      data: {categoryData},
       width: '40%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // console.log(result);
+      console.log(result,categoryData.id);
       if(result){
-        // console.log(result.id);
-        this.onEditCategory(result.id);
-        this.getTableData();
+        this.onEditCategory(result,categoryData.id);
       }
     });
   }
 
-  onEditCategory(data:any){
-    this._CategoryService.editCategories(data , data.id).subscribe({
+  onEditCategory(data:any,id:number){
+    this._CategoryService.editCategories(data,id).subscribe({
       next: (res) => {
         console.log(res);
       }, error: (err)=>{
@@ -138,6 +110,7 @@ export class CategoriesComponent implements OnInit {
       })
 }
 
+// Delete
   openDeleteDialog(categoryData: any): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: categoryData,
@@ -166,5 +139,20 @@ export class CategoriesComponent implements OnInit {
       })
 }
 
+// View
+openViewDialog(categoryData: any): void {
+  const dialogRef = this.dialog.open(ViewCategoryComponent, {
+    data: categoryData,
+    width: '80%',
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    // console.log(result);
+    if(result){
+    this.getTableData();
+    }
+  });
 }
 
+}
