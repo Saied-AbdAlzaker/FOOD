@@ -1,12 +1,11 @@
 import { HelperService } from './../../services/helper.service';
 import { RecipesService } from './services/recipes.service';
-import { AddEditRecipesComponent } from './components/add-edit-recipes/add-edit-recipes.component';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
-import { ITag, IٌRecipe, IٌRecipeTable } from './models/Recipe';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ICategory, ITag, IٌRecipe, IٌRecipeTable } from './models/Recipe';
+import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-recipes',
@@ -15,25 +14,24 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class RecipesComponent implements OnInit {
 
- 
-
   constructor(private _RecipesService:RecipesService, 
     private _ToastrService:ToastrService,
-    private _HelperService:HelperService) { }
+    private _HelperService:HelperService,
+    private dialog:MatDialog) { }
 
   pageSize:number=10;
   pageNumber:number | undefined = 1;
   tableResponse:IٌRecipeTable | undefined;
-  tableData:IٌRecipe[] | undefined = [];
+  tableData:IٌRecipe[] = [];
   tags:ITag[] = [];
+  categories:ICategory[] = [];
   tagId:any;
-  categories:any;
 
   searchValue:string = '';
 
   ngOnInit() {
     this.getAllTags();
-    this.getTableData();
+    this.getAllCategories();
   }
 
   getTableData() {
@@ -41,11 +39,12 @@ export class RecipesComponent implements OnInit {
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
       name: this.searchValue,
-      tagId: this.tagId
+      tagId: this.tagId,
+      categories: this.categories
     }
 
     this._RecipesService.getRecipes(params).subscribe({
-      next: (res) => {
+      next: (res: IٌRecipeTable) => {
         console.log(res);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
@@ -58,7 +57,6 @@ export class RecipesComponent implements OnInit {
       next: (res)=>{
         console.log(res);
         this.tags = res;
-        
       }
     })
   }
@@ -67,7 +65,6 @@ export class RecipesComponent implements OnInit {
       next: (res)=>{
         console.log(res);
         this.categories = res;
-        
       }
     })
   }
@@ -83,5 +80,34 @@ export class RecipesComponent implements OnInit {
     // this.pageSize = e.pageSize;
     // this.pageIndex = e.pageIndex; // More Than One Page
   }
+
+  // Delete
+  openDeleteDialog(categoryData: any): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: categoryData,
+      width: '40%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // console.log(result);
+      if(result){
+        // console.log(result.id);
+      this.onDeleteRecipe(result.id);
+      }
+    });
+  }
+  onDeleteRecipe(id: number){
+    this._RecipesService.deleteRecipes(id).subscribe({
+      next: (res) => {
+        console.log(res);
+      }, error: (err)=>{
+        console.log(err);
+      }, complete: ()=>{
+        this._ToastrService.success('Recipe Deleted Successfully', 'Ok');
+        this.getTableData();
+      }
+      })
+}
 
 }

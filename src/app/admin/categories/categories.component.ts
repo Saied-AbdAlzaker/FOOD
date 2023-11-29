@@ -20,7 +20,7 @@ export class CategoriesComponent implements OnInit {
   pageSize:number=10;
   pageNumber:number | undefined = 1;
   tableResponse:ICategoryTable | undefined;
-  tableData:ICategory[] | undefined = [];
+  tableData:ICategory[] = [];
 
   searchValue:string = '';
 
@@ -36,7 +36,7 @@ export class CategoriesComponent implements OnInit {
     }
 
     this._CategoryService.getCategories(params).subscribe({
-      next: (res) => {
+      next: (res: ICategoryTable) => {
         // console.log(res);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
