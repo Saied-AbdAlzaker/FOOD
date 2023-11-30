@@ -26,10 +26,12 @@ export class RecipesComponent implements OnInit {
   tags:ITag[] = [];
   categories:ICategory[] = [];
   tagId:any;
+  categoryId:any;
 
   searchValue:string = '';
 
   ngOnInit() {
+    this.getTableData();
     this.getAllTags();
     this.getAllCategories();
   }
@@ -72,13 +74,7 @@ export class RecipesComponent implements OnInit {
   handlePageEvent(e: PageEvent) {
     console.log(e);
     this.pageSize = e.pageSize;
-    // this.pageNumber = this.tableResponse?.pageNumber;
     this.getTableData();
-    
-    // this.pageEvent = e;
-    // this.length = e.length;
-    // this.pageSize = e.pageSize;
-    // this.pageIndex = e.pageIndex; // More Than One Page
   }
 
   // Delete
