@@ -64,7 +64,7 @@ export class RecipesComponent implements OnInit {
     this._HelperService.getCategories().subscribe({
       next: (res)=>{
         console.log(res);
-        this.categories = res;
+        this.categories = res.data;
       }
     })
   }
