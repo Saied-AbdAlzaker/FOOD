@@ -1,18 +1,19 @@
-import { HelperService } from './../../services/helper.service';
-import { RecipesService } from './services/recipes.service';
+import { RecipeDataComponent } from './../recipe-data/recipe-data.component';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { ToastrService } from 'ngx-toastr';
-import { ICategory, ITag, IٌRecipe, IٌRecipeTable } from './models/Recipe';
+import { IٌRecipeTable, IٌRecipe, ITag, ICategory } from 'src/app/admin/recipes/models/Recipe';
+import { RecipesService } from 'src/app/admin/recipes/services/recipes.service';
+import { HelperService } from 'src/app/services/helper.service';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.scss']
+  selector: 'app-user-recipes',
+  templateUrl: './user-recipes.component.html',
+  styleUrls: ['./user-recipes.component.scss']
 })
-export class RecipesComponent implements OnInit {
+export class UserRecipesComponent implements OnInit {
 
   constructor(private _RecipesService:RecipesService, 
     private _ToastrService:ToastrService,
@@ -34,6 +35,13 @@ export class RecipesComponent implements OnInit {
     this.getTableData();
     this.getAllTags();
     this.getAllCategories();
+  }
+
+  openViewDialog(recipeItem: IٌRecipe) {
+    this.dialog.open(RecipeDataComponent, {
+      data: recipeItem,
+      width: '40%'
+    });
   }
 
   getTableData() {

@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './users.component';
-import { RouterModule, Routes } from '@angular/router';
 import { SheardModule } from 'src/app/sheard/sheard.module';
+import { RouterModule, Routes } from '@angular/router';
+import { UserRecipesComponent } from './user-recipes/user-recipes.component';
 
 const routes: Routes = [
-  {path: '',component: UsersComponent},
+  {path:'',component: UserRecipesComponent},
 ];
 
 @NgModule({
+  declarations: [UserRecipesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SheardModule
-  ],
-  declarations: [UsersComponent]
+  ]
 })
-export class UsersModule { }
+export class UserRecipesModule { }

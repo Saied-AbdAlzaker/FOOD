@@ -64,7 +64,7 @@ export class SidebarComponent {
     },
     {
       title: 'Favorites',
-      icon: 'fa-solid fa-calendar-week',
+      icon: 'fa-regular fa-heart',
       link: '/dashboard/user/favorites',
       isActive: this.isUser()
     },
