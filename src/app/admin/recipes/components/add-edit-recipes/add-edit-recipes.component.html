@@ -35,9 +35,12 @@
         </div>
 
         <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
-          <ngx-dropzone-label>
+          <ngx-dropzone-label *ngIf="!imgSrc">
             <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
           Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+          </ngx-dropzone-label>
+          <ngx-dropzone-label *ngIf="imgSrc">
+            <img [src]="imgSrc" class="w-25" alt="">
           </ngx-dropzone-label>
           <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
             [removable]="true" (removed)="onRemove(f)">

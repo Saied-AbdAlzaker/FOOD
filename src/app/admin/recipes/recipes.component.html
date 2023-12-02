@@ -61,7 +61,7 @@
       <tbody *ngIf="tableData.length > 0">
         <tr *ngFor="let item of tableData">
           <td>{{item.name}}</td>
-          <td class="w-25 rounded-2"><img [src]="'https://upskilling-egypt.com:443/'+item.imagePath" alt=""
+          <td class="w-25 rounded-2"><img [src]="'https://upskilling-egypt.com/'+item.imagePath" alt=""
               class="w-50"></td>
           <td>{{item.price}}</td>
           <td>{{item.description}}</td>
@@ -82,14 +82,14 @@
           <!-- <td>
             <a (click)="openViewDialog(item)" class="text-success text-decoration-none cursor"><i
                 class="fa-regular fa-eye mx-2"></i>View</a>
-          </td>
-          <td>
-            <a (click)="openEditDialog(item)" class="text-info text-decoration-none cursor"><i
-                class="fa-solid fa-pen-to-square mx-2"></i>Edit</a>
           </td> -->
           <td>
+            <a [routerLink]="['/dashboard/admin/recipes/edit' , item.id]" class="text-info text-decoration-none cursor"><i
+                class="fa-solid fa-pen-to-square mx-2"></i>Edit</a>
+          </td>
+          <td>
             <a (click)="openDeleteDialog(item)" class="text-danger text-decoration-none cursor"><i
-                class="fa-solid fa-trash-can mx-2"></i></a>
+                class="fa-solid fa-trash-can mx-2"></i>Delete</a>
           </td>
           </div>
           </ul>

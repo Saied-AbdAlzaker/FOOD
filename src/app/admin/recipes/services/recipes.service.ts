@@ -12,18 +12,21 @@ export class RecipesService {
   getRecipes(data:any): Observable<any>{
     return this._HttpClient.get('Recipe' , {params: data})
   }
+
+  getRecipeById(id:number): Observable<any>{
+    return this._HttpClient.get(`Recipe/${id}`)
+  }
   
   addRecipes(data:any): Observable<any>{
     return this._HttpClient.post('Recipe' , data)
+  }
+
+  editRecipes(data: any , id: number): Observable<any>{
+    return this._HttpClient.put(`Recipe/${id}` , data)
   }
   
   deleteRecipes(id:number): Observable<any>{
     return this._HttpClient.delete(`Recipe/${id}`)
   }
   
-  editRecipes(id:number , data:string): Observable<any>{
-    return this._HttpClient.put(`Category/${id}` , {params: data})
-  }
-  
-
 }

@@ -31,9 +31,9 @@ export class RecipesComponent implements OnInit {
   searchValue:string = '';
 
   ngOnInit() {
-    this.getTableData();
     this.getAllTags();
     this.getAllCategories();
+    this.getTableData();
   }
 
   getTableData() {
@@ -42,12 +42,12 @@ export class RecipesComponent implements OnInit {
       pageNumber: this.pageNumber,
       name: this.searchValue,
       tagId: this.tagId,
-      categories: this.categories
+      categoryId: this.categoryId
     }
 
     this._RecipesService.getRecipes(params).subscribe({
       next: (res: IٌRecipeTable) => {
-        console.log(res);
+        // console.log(res.data);
         this.tableResponse = res;
         this.tableData = this.tableResponse?.data;
       }
@@ -57,7 +57,7 @@ export class RecipesComponent implements OnInit {
   getAllTags(){
     this._HelperService.getTags().subscribe({
       next: (res)=>{
-        console.log(res);
+        // console.log(res);
         this.tags = res;
       }
     })
@@ -66,7 +66,7 @@ export class RecipesComponent implements OnInit {
   getAllCategories(){
     this._HelperService.getCategories().subscribe({
       next: (res)=>{
-        console.log(res.data);
+        // console.log(res.data);
         this.categories = res.data;
       }
     })

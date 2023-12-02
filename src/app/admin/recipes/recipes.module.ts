@@ -8,7 +8,8 @@ import { SheardModule } from 'src/app/sheard/sheard.module';
 
 const routes: Routes = [
   {path: '',component: RecipesComponent},
-  {path: 'add',component: AddEditRecipesComponent}
+  {path: 'add',component: AddEditRecipesComponent},
+  {path: 'edit/:id',component: AddEditRecipesComponent},
 ];
 
 @NgModule({

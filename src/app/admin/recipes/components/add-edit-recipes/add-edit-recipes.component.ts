@@ -1,5 +1,6 @@
+import { IٌRecipe } from 'src/app/admin/recipes/models/Recipe';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipesService } from './../../services/recipes.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -13,21 +14,13 @@ import { ICategory, ITag } from '../../models/Recipe';
 })
 export class AddEditRecipesComponent implements OnInit {
 
-  recipesImage:any;
+  imgSrc:any;
   recipesName:string='';
   tags:ITag[] = [];
   categories:ICategory[] = [];
-
-  constructor(private _HelperService:HelperService,
-              private _RecipesService:RecipesService,
-              private _router:Router,
-              private _toastrService:ToastrService) {}
-
-  ngOnInit() {
-    this.getAllTags();
-    this.getAllCategories();
-  }
-
+  recipeId:any;
+  recipeData: IٌRecipe | any;
+  isUpdatePage:boolean = false;
   recipeForm = new FormGroup({
     name: new FormControl(null),
     price: new FormControl(null),
@@ -36,6 +29,26 @@ export class AddEditRecipesComponent implements OnInit {
     description: new FormControl(null),
   })
 
+  constructor(private _HelperService:HelperService,
+              private _RecipesService:RecipesService,
+              private _router:Router,
+              private _toastrService:ToastrService,
+              private _ActivatedRoute:ActivatedRoute) {
+                console.log(_ActivatedRoute.snapshot.params['id']);
+                this.recipeId = _ActivatedRoute.snapshot.params['id'];
+                if(this.recipeId){
+                  this.isUpdatePage = true;
+                  this.getRecipesById(this.recipeId);
+                } else {
+                  this.isUpdatePage = false
+                }
+              }
+
+  ngOnInit() {
+    this.getAllTags();
+    this.getAllCategories();
+  }
+
   onSubmit(data:FormGroup){
     let myData = new FormData();
     myData.append('name',data.value.name);
@@ -43,8 +56,53 @@ export class AddEditRecipesComponent implements OnInit {
     myData.append('tagId',data.value.tagId);
     myData.append('categoriesIds',data.value.categoriesIds);
     myData.append('description',data.value.description);
-    myData.append('recipeImage',this.recipesImage,this.recipesImage.name);
+    myData.append('recipeImage',this.imgSrc,this.imgSrc.name);
 
+    if(this.recipeId){
+      // Update
+      this.editRecipes();
+      // this._RecipesService.editRecipes(myData,this.recipeId).subscribe({
+      //   next: (res)=>{
+      //     console.log(res);
+      //   }, error: (err)=>{
+      //     this._toastrService.success('Recipe Not Update', 'Ok');
+      //   }, complete: ()=>{
+      //     this._router.navigate(['/dashboard/admin/recipes'])
+      //     this._toastrService.success('Recipe Update Successfully', 'Ok');
+      //   }
+      // })
+    } else{
+      // Add
+      this.addRecipes();
+      // this._RecipesService.addRecipes(myData).subscribe({
+      //   next: (res)=>{
+      //     console.log(res);
+      //   }, error: (err)=>{
+      //     this._toastrService.success('Recipe Not Added', 'Ok');
+      //   }, complete: ()=>{
+      //     this._router.navigate(['/dashboard/admin/recipes'])
+      //     this._toastrService.success('Recipe Add Successfully', 'Ok');
+      //   }
+      // })
+    }
+  }
+
+  editRecipes(){
+    let myData = new FormData();
+    this._RecipesService.editRecipes(myData,this.recipeId).subscribe({
+      next: (res)=>{
+        console.log(res);
+      }, error: (err)=>{
+        this._toastrService.success('Recipe Not Update', 'Ok');
+      }, complete: ()=>{
+        this._router.navigate(['/dashboard/admin/recipes'])
+        this._toastrService.success('Recipe Update Successfully', 'Ok');
+      }
+    })
+  }
+
+  addRecipes(){
+    let myData = new FormData();
     this._RecipesService.addRecipes(myData).subscribe({
       next: (res)=>{
         console.log(res);
@@ -79,7 +137,7 @@ export class AddEditRecipesComponent implements OnInit {
   files: File[] = [];
 
 onSelect(event:any) {
-  this.recipesImage = event.addedFiles[0];
+  this.imgSrc = event.addedFiles[0];
   console.log(event);
   this.files.push(...event.addedFiles);
 }
@@ -87,6 +145,26 @@ onSelect(event:any) {
 onRemove(event:any) {
   console.log(event);
   this.files.splice(this.files.indexOf(event), 1);
+}
+
+getRecipesById(id: number){
+  this._RecipesService.getRecipeById(id).subscribe({
+    next: (res)=>{
+      console.log(res);
+      this.recipeData = res;
+    }, error: (err)=>{
+      console.log(err);
+    }, complete: ()=>{
+      this.imgSrc = 'https://upskilling-egypt.com/' + this.recipeData.imagePath ;
+      this.recipeForm.patchValue({
+        name: this.recipeData?.name,
+        price: this.recipeData?.price,
+        tagId: this.recipeData?.tag.id,
+        categoriesIds: this.recipeData?.category[0].id,
+        description: this.recipeData?.description,
+      })
+    }
+  })
 }
 
 }

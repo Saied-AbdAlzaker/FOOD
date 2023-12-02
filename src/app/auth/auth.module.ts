@@ -1,3 +1,4 @@
+import { RegisterComponent } from './register/register.component';
 import { RequestResetPasswordComponent } from './request-reset-password/request-reset-password.component';
 import { SheardModule } from './../sheard/sheard.module';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'resetPassword',component:ResetPasswordComponent},
   {path:'changePassword',component:ChangePasswordComponent},
+  {path:'register',component:RegisterComponent},
 ];
 
 
@@ -22,6 +24,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SheardModule
   ],
-  declarations: [AuthComponent,LoginComponent,ResetPasswordComponent,RequestResetPasswordComponent, ChangePasswordComponent]
+  declarations: [AuthComponent,LoginComponent,ResetPasswordComponent,RequestResetPasswordComponent,
+     ChangePasswordComponent, RegisterComponent]
 })
 export class AuthModule { }
