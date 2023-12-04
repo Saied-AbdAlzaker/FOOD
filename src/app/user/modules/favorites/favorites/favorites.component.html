@@ -1,3 +1,42 @@
-<p>
-  favorites works!
-</p>
+<section id="page-header" class="px-5 my-3">
+  <div class="contauner">
+    <div class="row align-items-center">
+      <div class="col-9">
+        <h3>Favorites <span>Items</span></h3>
+        <p>You can now add your items that any user can order it from <br> the Application and you can edit</p>
+      </div>
+      <div class="col-3">
+        <div class="text-end">
+          <img src="../../../assets/images/category-avatar.svg" alt="category" class="w-75">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="row py-5 gy-3" *ngIf="myFavorite">
+    <div class="col-md-4" *ngFor="let item of myFavorite">
+      <div class="item shadow">
+        <div>
+          <img [src]="'https://upskilling-egypt.com/'+item.recipe.imagePath" alt="" class="w-100">
+        </div>
+        <div class="p-3">
+          <h4>{{item.recipe.name}}</h4>
+          <p>{{item.recipe.description}}</p>
+        </div>
+        <a (click)="removeFavorite(item.id)" class="delete-icon">
+          <i class="fa-solid fa-trash-can text-danger"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-info">
+    <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
+      [length]="tableResponse?.totalNumberOfRecords" [pageSize]="tableResponse?.pageSize"
+      [pageSizeOptions]="[5,10,15,20,25]" [pageIndex]="tableResponse?.pageNumber" aria-label="Select page">
+    </mat-paginator>
+  </div>
+  
+</div>

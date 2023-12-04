@@ -81,7 +81,8 @@
           </td>
           <td>
             <!-- (click)="openEditDialog(item)"  -->
-            <a class="text-info text-decoration-none cursor"><i
+            <!-- [routerLink]="['/dashboard/admin/recipes/edit',item.id]" -->
+            <a (click)="addToFavorites(item.id)" class="text-info text-decoration-none cursor"><i
                 class="fa-regular fa-heart mx-2"></i>Favorites</a>
           </td>
           <!-- <td>

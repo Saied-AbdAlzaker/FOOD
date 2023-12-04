@@ -1,3 +1,4 @@
+import { VerifyComponent } from './verify/verify.component';
 import { RegisterComponent } from './register/register.component';
 import { RequestResetPasswordComponent } from './request-reset-password/request-reset-password.component';
 import { SheardModule } from './../sheard/sheard.module';
@@ -25,6 +26,6 @@ const routes: Routes = [
     SheardModule
   ],
   declarations: [AuthComponent,LoginComponent,ResetPasswordComponent,RequestResetPasswordComponent,
-     ChangePasswordComponent, RegisterComponent]
+     ChangePasswordComponent, RegisterComponent, VerifyComponent]
 })
 export class AuthModule { }

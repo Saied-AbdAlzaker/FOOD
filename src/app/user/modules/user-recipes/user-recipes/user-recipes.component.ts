@@ -7,7 +7,7 @@ import { IٌRecipeTable, IٌRecipe, ITag, ICategory } from 'src/app/admin/recipe
 import { RecipesService } from 'src/app/admin/recipes/services/recipes.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
-
+import { FavoritesService } from '../../favorites/services/favorites.service';
 @Component({
   selector: 'app-user-recipes',
   templateUrl: './user-recipes.component.html',
@@ -18,7 +18,9 @@ export class UserRecipesComponent implements OnInit {
   constructor(private _RecipesService:RecipesService, 
     private _ToastrService:ToastrService,
     private _HelperService:HelperService,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog,
+    private _FavoritesService:FavoritesService,
+    private toastr:ToastrService) { }
 
   pageSize:number = 25;
   pageNumber:number | undefined = 1;
@@ -38,10 +40,36 @@ export class UserRecipesComponent implements OnInit {
   }
 
   openViewDialog(recipeItem: IٌRecipe) {
-    this.dialog.open(RecipeDataComponent, {
+    const dialogRef = this.dialog.open(RecipeDataComponent, {
       data: recipeItem,
       width: '40%'
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    if(result){
+      console.log(result);
+      this.addToFavorites(result);
+    }
+  });
+
+  }
+
+   Message:string='';
+
+  addToFavorites(id: number){
+    this._FavoritesService.onAddRecipeToFavorite(id).subscribe({
+      next: (res)=>{
+        console.log(res);
+        this.Message = res.message;
+      },error: (err)=>{
+        console.log(err);
+        this.toastr.error(err.error.message, 'Error!');
+        
+      },complete: ()=>{
+        this.toastr.success('Recipe Add To My Favorite', 'Successfully!');
+      }
+    })
   }
 
   getTableData() {
@@ -50,7 +78,7 @@ export class UserRecipesComponent implements OnInit {
       pageNumber: this.pageNumber,
       name: this.searchValue,
       tagId: this.tagId,
-      categories: this.categories
+      categoryId: this.categoryId
     }
 
     this._RecipesService.getRecipes(params).subscribe({

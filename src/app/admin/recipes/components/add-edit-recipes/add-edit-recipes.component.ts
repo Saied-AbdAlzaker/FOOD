@@ -60,60 +60,60 @@ export class AddEditRecipesComponent implements OnInit {
 
     if(this.recipeId){
       // Update
-      this.editRecipes();
-      // this._RecipesService.editRecipes(myData,this.recipeId).subscribe({
-      //   next: (res)=>{
-      //     console.log(res);
-      //   }, error: (err)=>{
-      //     this._toastrService.success('Recipe Not Update', 'Ok');
-      //   }, complete: ()=>{
-      //     this._router.navigate(['/dashboard/admin/recipes'])
-      //     this._toastrService.success('Recipe Update Successfully', 'Ok');
-      //   }
-      // })
+      // this.editRecipes();
+      this._RecipesService.editRecipes(myData,this.recipeId).subscribe({
+        next: (res)=>{
+          console.log(res);
+        }, error: (err)=>{
+          this._toastrService.success('Recipe Not Update', 'Ok');
+        }, complete: ()=>{
+          this._router.navigate(['/dashboard/admin/recipes'])
+          this._toastrService.success('Recipe Update Successfully', 'Ok');
+        }
+      })
     } else{
       // Add
-      this.addRecipes();
-      // this._RecipesService.addRecipes(myData).subscribe({
-      //   next: (res)=>{
-      //     console.log(res);
-      //   }, error: (err)=>{
-      //     this._toastrService.success('Recipe Not Added', 'Ok');
-      //   }, complete: ()=>{
-      //     this._router.navigate(['/dashboard/admin/recipes'])
-      //     this._toastrService.success('Recipe Add Successfully', 'Ok');
-      //   }
-      // })
+      // this.addRecipes();
+      this._RecipesService.addRecipes(myData).subscribe({
+        next: (res)=>{
+          console.log(res);
+        }, error: (err)=>{
+          this._toastrService.success('Recipe Not Added', 'Ok');
+        }, complete: ()=>{
+          this._router.navigate(['/dashboard/admin/recipes'])
+          this._toastrService.success('Recipe Add Successfully', 'Ok');
+        }
+      })
     }
   }
 
-  editRecipes(){
-    let myData = new FormData();
-    this._RecipesService.editRecipes(myData,this.recipeId).subscribe({
-      next: (res)=>{
-        console.log(res);
-      }, error: (err)=>{
-        this._toastrService.success('Recipe Not Update', 'Ok');
-      }, complete: ()=>{
-        this._router.navigate(['/dashboard/admin/recipes'])
-        this._toastrService.success('Recipe Update Successfully', 'Ok');
-      }
-    })
-  }
+  // editRecipes(){
+  //   let myData = new FormData();
+  //   this._RecipesService.editRecipes(myData,this.recipeId).subscribe({
+  //     next: (res)=>{
+  //       console.log(res);
+  //     }, error: (err)=>{
+  //       this._toastrService.success('Recipe Not Update', 'Ok');
+  //     }, complete: ()=>{
+  //       this._router.navigate(['/dashboard/admin/recipes'])
+  //       this._toastrService.success('Recipe Update Successfully', 'Ok');
+  //     }
+  //   })
+  // }
 
-  addRecipes(){
-    let myData = new FormData();
-    this._RecipesService.addRecipes(myData).subscribe({
-      next: (res)=>{
-        console.log(res);
-      }, error: (err)=>{
-        this._toastrService.success('Recipe Not Added', 'Ok');
-      }, complete: ()=>{
-        this._router.navigate(['/dashboard/admin/recipes'])
-        this._toastrService.success('Recipe Add Successfully', 'Ok');
-      }
-    })
-  }
+  // addRecipes(){
+  //   let myData = new FormData();
+  //   this._RecipesService.addRecipes(myData).subscribe({
+  //     next: (res)=>{
+  //       console.log(res);
+  //     }, error: (err)=>{
+  //       this._toastrService.success('Recipe Not Added', 'Ok');
+  //     }, complete: ()=>{
+  //       this._router.navigate(['/dashboard/admin/recipes'])
+  //       this._toastrService.success('Recipe Add Successfully', 'Ok');
+  //     }
+  //   })
+  // }
 
   getAllTags(){
     this._HelperService.getTags().subscribe({

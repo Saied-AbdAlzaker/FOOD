@@ -1,5 +1,5 @@
 import { IChange } from './../models/reset';
-import { ILogin } from './../models/login';
+import { ILogin, IRegister } from './../models/login';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IReset } from '../models/reset';
@@ -36,6 +36,9 @@ getRole(){
 onLogin(data:ILogin){
   return this.http.post('Users/Login', data)
 }
+onRegister(data:any){
+  return this.http.post('Users/Register', data)
+}
 
 onRequestResetPassword(data:string){
   return this.http.post('Users/Reset/Request', {email: data})
@@ -47,6 +50,10 @@ onResetPassword(data:IReset){
 
 onChangePassword(data:any){
   return this.http.put('Users/ChangePassword', data)
+}
+
+onVerifyAccount(data:any){
+  return this.http.put('Users/verify', data)
 }
 
 }

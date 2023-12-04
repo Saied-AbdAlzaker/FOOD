@@ -22,7 +22,7 @@
         <h6> <span>Description:</span> {{data.description}}</h6>
       </div>
       <div class="col-md-12 text-end mt-3">
-        <button class="btn btn-outline-danger">
+        <button class="btn btn-outline-danger"  [mat-dialog-close]="data.id" cdkFocusInitial>
           <i class="fa-regular fa-heart mx-2"></i>
           <span>Favorite</span>
         </button>

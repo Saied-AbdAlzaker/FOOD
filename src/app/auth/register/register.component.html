@@ -1,3 +1,125 @@
-<p>
-  register works!
-</p>
+<section id="register">
+  <div class="register-box">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 mx-auto">
+          <div class="card-auth">
+            <div class="text-center">
+              <img src="../../../assets/images/logo-.svg" alt="logo">
+            </div>
+            <div class="ms-5">
+              <h3>Register</h3>
+            <p class="text-second">Welcome Back! Please enter your details</p>
+            </div>
+  
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
+              <div class="row justify-content-between">
+                <div class="col-md-5 ms-5">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                    <input formControlName="userName" type="text" class="form-control" placeholder="User Name"
+                      aria-label="userName" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="alert alert-danger p-2" *ngIf="registerForm.controls.userName.errors && registerForm.controls.userName.touched">
+                    <p *ngIf="registerForm.get('userName')?.getError('required')">User Name Is Required</p>
+                    <p class="h6" *ngIf="registerForm.get('userName')?.getError('pattern')">The User Name Must Be Contain Characters And End With Numbers Without Space. </p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 me-5">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+                    <input formControlName="email" type="text" class="form-control" placeholder="Enter Your Email"
+                      aria-label="email" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="alert alert-danger p-2" *ngIf="registerForm.controls.email.errors && registerForm.controls.email.touched">
+                    <p *ngIf="registerForm.get('email')?.getError('required')">Email Is Required</p>
+                    <p *ngIf="registerForm.get('email')?.getError('email')">Email Is Invalid</p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 ms-5">
+                  <div class="input-group mb-3 position-relative">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-globe"></i></span>
+                    <input formControlName="country" [type]="hide?'country':'text'" class="form-control" placeholder="Country"
+                      aria-label="country" aria-describedby="basic-addon1">
+                      
+                  </div>
+                  <div class="alert alert-danger p-2" *ngIf="registerForm.controls.country.errors && registerForm.controls.country.touched">
+                    <p *ngIf="registerForm.get('country')?.getError('required')">country Is Required</p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 me-5">
+                  <div class="input-group mb-3 position-relative">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-mobile-screen-button"></i></span>
+                    <input formControlName="phoneNumber" [type]="hide?'phoneNumber':'text'" class="form-control" placeholder="Phone Number"
+                      aria-label="phoneNumber" aria-describedby="basic-addon1">
+                      
+                  </div>
+                  <div class="alert alert-danger p-2" *ngIf="registerForm.controls.phoneNumber.errors && registerForm.controls.phoneNumber.touched">
+                    <p *ngIf="registerForm.get('phoneNumber')?.getError('required')">Phone Number Is Required</p>
+                    <p *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">Phone Number Is Required</p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 ms-5">
+                  <div class="input-group mb-3 position-relative">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                    <input formControlName="password" [type]="hide?'password':'text'" class="form-control" placeholder="Password"
+                      aria-label="password" aria-describedby="basic-addon1">
+                      <span class="eye-icon" (click)="hide=!hide"><i class="fa-solid" [class]="hide?'fa-eye-slash':'fa-eye'"></i></span>
+                  </div>
+                  <div class="alert alert-danger p-2" *ngIf="registerForm.controls.password.errors && registerForm.controls.password.touched">
+                    <p *ngIf="registerForm.get('password')?.getError('required')">password Is Required</p>
+                    <p *ngIf="registerForm.get('password')?.getError('pattern')">Please must have A,a ,@,%,$,#, From 8 , 16</p>
+                  </div>
+                </div>
+
+                <div class="col-md-5 me-5">
+                  <div class="input-group mb-3 position-relative">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-lock"></i></span>
+                    <input formControlName="confirmPassword" [type]="hideConfirm?'password':'text'" class="form-control" placeholder="Confirm Password"
+                      aria-label="confirmPassword" aria-describedby="basic-addon1">
+                      <span class="eye-icon" (click)="hideConfirm=!hideConfirm"><i class="fa-solid" [class]="hideConfirm?'fa-eye-slash':'fa-eye'"></i></span>
+                  </div>
+                  <div class="alert alert-danger p-2" *ngIf="registerForm.controls.confirmPassword.errors && registerForm.controls.confirmPassword.touched">
+                    <p *ngIf="registerForm.get('confirmPassword')?.getError('required')">Confirm Password Is Required</p>
+                    <p *ngIf="registerForm.errors?.['passwordmatcherrors']">Confirm Password Does Not Match</p>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+                    <ngx-dropzone-label *ngIf="!imgSrc">
+                      <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                    Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-label *ngIf="imgSrc">
+                      <img [src]="imgSrc" class="w-25" alt="">
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+                      [removable]="true" (removed)="onRemove(f)">
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-image-preview>
+                  </ngx-dropzone>
+                </div>
+
+              </div>
+
+              <div class="d-flex justify-content-between my-2">
+                <a (click)="openDialog()" class="text-main text-decoration-none">Have Code?</a>
+                <a routerLink="/auth/login" class="text-main text-decoration-none me-5">Login Now?</a>
+              </div>
+              
+              <div class="text-center">
+                <button [disabled]="registerForm.invalid" class="primary w-50">Register</button>
+              </div>
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
