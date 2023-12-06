@@ -21,6 +21,7 @@ export class AddEditRecipesComponent implements OnInit {
   recipeId:any;
   recipeData: IٌRecipe | any;
   isUpdatePage:boolean = false;
+
   recipeForm = new FormGroup({
     name: new FormControl(null),
     price: new FormControl(null),
@@ -34,6 +35,7 @@ export class AddEditRecipesComponent implements OnInit {
               private _router:Router,
               private _toastrService:ToastrService,
               private _ActivatedRoute:ActivatedRoute) {
+                
                 console.log(_ActivatedRoute.snapshot.params['id']);
                 this.recipeId = _ActivatedRoute.snapshot.params['id'];
                 if(this.recipeId){

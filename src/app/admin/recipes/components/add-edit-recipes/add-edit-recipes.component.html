@@ -1,3 +1,19 @@
+<section class="my-3 p-4 bg-second">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8">
+              <h2 *ngIf="!isUpdatePage">Fill the <span class="text-main">Recipes !</span></h2>
+              <h2 *ngIf="isUpdatePage">Edit the <span class="text-main">Recipes !</span></h2>
+              <p class="text-muted">you can now fill the meals easily using the table and form ,<br>
+                   click here and sill it with the table !</p>
+          </div>
+          <div class="col-md-4 m-auto text-center">
+              <button [routerLink]="['/dashboard/admin/recipes']" class="btn primary">All Recipes <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+      </div>
+  </div>
+</section>
+
 <section class="container">
   <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm)">
     <div class="row card-auth shadow-sm">

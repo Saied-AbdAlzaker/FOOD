@@ -25,6 +25,10 @@ deleteCategories(id:number): Observable<any>{
   return this._HttpClient.delete(`Category/${id}`)
 }
 
+getCategoryById(id:number): Observable<any>{
+  return this._HttpClient.get(`Category/${id}`)
+}
+
 editCategories(data:any,id:number): Observable<any>{
   return this._HttpClient.put(`Category/${id}` , {name:data})
 }

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditCategoryComponent } from './components/add-edit-category/add-edit-category.component';
 import { ViewCategoryComponent } from './components/view-category/view-category.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -15,7 +16,13 @@ import { ViewCategoryComponent } from './components/view-category/view-category.
 })
 export class CategoriesComponent implements OnInit {
 
-  constructor(private _CategoryService:CategoryService, private dialog:MatDialog, private _ToastrService:ToastrService) { }
+  categoryId:any;
+  categoryData: ICategory | any;
+  isUpdatePage:boolean = false;
+
+  constructor(private _CategoryService:CategoryService, 
+    private dialog:MatDialog, private _ToastrService:ToastrService,
+    private _ActivatedRoute:ActivatedRoute) {}
 
   pageSize:number=10;
   pageNumber:number | undefined = 1;
@@ -80,17 +87,18 @@ export class CategoriesComponent implements OnInit {
       }
       })
 }
+categoryName: string = '';
 
 // Edit
   openEditDialog(categoryData: any): void {
     const dialogRef = this.dialog.open(AddEditCategoryComponent, {
-      data: {categoryData},
+      data: {categoryName: categoryData.name},
       width: '40%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result,categoryData.id);
+      console.log(categoryData.name,categoryData.id);
       if(result){
         this.onEditCategory(result,categoryData.id);
       }
@@ -109,6 +117,22 @@ export class CategoriesComponent implements OnInit {
       }
       })
 }
+
+// getCategoriesById(id: number){
+//         this._CategoryService.getCategoryById(id).subscribe({
+//           next: (res)=>{
+//             console.log(res);
+//             this.categoryData = res.data;
+//           }, error: (err)=>{
+//             console.log(err);
+//           }, complete: ()=>{
+//             // this.categoryForm.patchValue({
+//             //   name: this.categoryData?.name
+//             // })
+//           }
+//         })
+//       }
+
 
 // Delete
   openDeleteDialog(categoryData: any): void {

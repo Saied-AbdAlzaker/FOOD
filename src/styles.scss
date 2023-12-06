@@ -41,9 +41,10 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
 .card-auth {
   background-color: #fff;
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 4rem;
+  margin-top: 10px;
 
-  h2,h3 {
+  h2 {
     color: #494949;
   }
 
@@ -86,7 +87,7 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
     padding: 10px 15px;
 
     &.primary {
-      background-color: #4AA35A;
+      background-color: #009247;
       color: #fff;
 
       &:hover {
@@ -122,7 +123,7 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .bg-second {
-  background-color: #F7F7F7 !important;
+  background-color: #E2E5EB !important;
 }
 
 #page-header{
@@ -130,12 +131,8 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  border-radius: 40px;
+  border-radius: 70px;
   color: #fff;
-  -webkit-border-radius: 40px;
-  -moz-border-radius: 40px;
-  -ms-border-radius: 40px;
-  -o-border-radius: 40px;
 }
 
 .cursor{
