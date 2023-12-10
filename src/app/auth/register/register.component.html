@@ -21,8 +21,8 @@
                       aria-label="userName" aria-describedby="basic-addon1">
                   </div>
                   <div class="alert alert-danger p-2" *ngIf="registerForm.controls.userName.errors && registerForm.controls.userName.touched">
-                    <p *ngIf="registerForm.get('userName')?.getError('required')">User Name Is Required</p>
-                    <p class="h6" *ngIf="registerForm.get('userName')?.getError('pattern')">The User Name Must Be Contain Characters And End With Numbers Without Space. </p>
+                    <p *ngIf="registerForm.get('userName')?.getError('required')" class="mb-0">User Name Is Required</p>
+                    <p class="h6" *ngIf="registerForm.get('userName')?.getError('pattern')" class="mb-0">The User Name Must Be Contain Characters And End With Numbers Without Space. </p>
                   </div>
                 </div>
 
@@ -33,8 +33,8 @@
                       aria-label="email" aria-describedby="basic-addon1">
                   </div>
                   <div class="alert alert-danger p-2" *ngIf="registerForm.controls.email.errors && registerForm.controls.email.touched">
-                    <p *ngIf="registerForm.get('email')?.getError('required')">Email Is Required</p>
-                    <p *ngIf="registerForm.get('email')?.getError('email')">Email Is Invalid</p>
+                    <p *ngIf="registerForm.get('email')?.getError('required')" class="mb-0">Email Is Required</p>
+                    <p *ngIf="registerForm.get('email')?.getError('email')" class="mb-0">Email Is Invalid</p>
                   </div>
                 </div>
 
@@ -46,7 +46,7 @@
                       
                   </div>
                   <div class="alert alert-danger p-2" *ngIf="registerForm.controls.country.errors && registerForm.controls.country.touched">
-                    <p *ngIf="registerForm.get('country')?.getError('required')">country Is Required</p>
+                    <p *ngIf="registerForm.get('country')?.getError('required')" class="mb-0">country Is Required</p>
                   </div>
                 </div>
 
@@ -58,8 +58,8 @@
                       
                   </div>
                   <div class="alert alert-danger p-2" *ngIf="registerForm.controls.phoneNumber.errors && registerForm.controls.phoneNumber.touched">
-                    <p *ngIf="registerForm.get('phoneNumber')?.getError('required')">Phone Number Is Required</p>
-                    <p *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">Phone Number Is Required</p>
+                    <p *ngIf="registerForm.get('phoneNumber')?.getError('required')" class="mb-0">Phone Number Is Required</p>
+                    <p *ngIf="registerForm.get('phoneNumber')?.getError('pattern')" class="mb-0">Phone Number Is Required</p>
                   </div>
                 </div>
 
@@ -71,8 +71,8 @@
                       <span class="eye-icon" (click)="hide=!hide"><i class="fa-solid" [class]="hide?'fa-eye-slash':'fa-eye'"></i></span>
                   </div>
                   <div class="alert alert-danger p-2" *ngIf="registerForm.controls.password.errors && registerForm.controls.password.touched">
-                    <p *ngIf="registerForm.get('password')?.getError('required')">password Is Required</p>
-                    <p *ngIf="registerForm.get('password')?.getError('pattern')">Please must have A,a ,@,%,$,#, From 8 , 16</p>
+                    <p *ngIf="registerForm.get('password')?.getError('required')" class="mb-0">password Is Required</p>
+                    <p *ngIf="registerForm.get('password')?.getError('pattern')" class="mb-0">Please must have A,a ,@,%,$,#, From 8 , 16</p>
                   </div>
                 </div>
 
@@ -84,8 +84,8 @@
                       <span class="eye-icon" (click)="hideConfirm=!hideConfirm"><i class="fa-solid" [class]="hideConfirm?'fa-eye-slash':'fa-eye'"></i></span>
                   </div>
                   <div class="alert alert-danger p-2" *ngIf="registerForm.controls.confirmPassword.errors && registerForm.controls.confirmPassword.touched">
-                    <p *ngIf="registerForm.get('confirmPassword')?.getError('required')">Confirm Password Is Required</p>
-                    <p *ngIf="registerForm.errors?.['passwordmatcherrors']">Confirm Password Does Not Match</p>
+                    <p *ngIf="registerForm.get('confirmPassword')?.getError('required')" class="mb-0">Confirm Password Is Required</p>
+                    <p *ngIf="registerForm.get('confirmPassword')?.getError('invalid')" class="mb-0">Password And Confirm Password Not Match</p>
                   </div>
                 </div>
 

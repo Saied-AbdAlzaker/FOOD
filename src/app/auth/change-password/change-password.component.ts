@@ -16,13 +16,27 @@ export class ChangePasswordComponent {
     private router:Router) { }
 
   errorMessage:string=''
-  userPassword = localStorage.getItem('oldPassword');
 
   changeForm = new FormGroup({
-    oldPassword: new FormControl(this.userPassword,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
+    oldPassword: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
     newPassword: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
     confirmNewPassword: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
+  },
+  {
+    validators: this.matchPasswords
   })
+
+  matchPasswords(form: any){
+    let newPassword = form.get('newPassword');
+    let confirmNewPassword = form.get('confirmNewPassword');
+  
+    if(newPassword.value == confirmNewPassword.value){
+      return null
+    } else{
+      confirmNewPassword.setErrors({invalid: 'New Password And Confirm Password Not Match'});
+      return {invalid: 'New Password And Confirm Password Not Match'};
+    }
+  }
 
   onChangeSubmit(data: FormGroup){
     this._AuthService.onChangePassword(data.value).subscribe({
@@ -34,8 +48,8 @@ export class ChangePasswordComponent {
         this.toastr.error(err.error.message, 'Error!');
         
       } , complete: ()=> {
-        this.toastr.success(this.errorMessage, 'Successfully!');
         this.router.navigate(['/dashboard'])
+        this.toastr.success(this.errorMessage, 'Successfully!');
       }
     })
   }

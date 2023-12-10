@@ -32,11 +32,11 @@
     </div>
   </div>
 
-  <div class="bg-info">
-    <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)"
-      [length]="tableResponse?.totalNumberOfRecords" [pageSize]="tableResponse?.pageSize"
-      [pageSizeOptions]="[5,10,15,20,25]" [pageIndex]="tableResponse?.pageNumber" aria-label="Select page">
-    </mat-paginator>
-  </div>
-  
+  <pagination-controls class="float-end"
+    previousLabel="Prev" 
+    nextLabel="Next"
+    (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+
 </div>
+

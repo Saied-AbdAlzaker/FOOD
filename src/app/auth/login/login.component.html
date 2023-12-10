@@ -17,8 +17,8 @@
                   aria-label="email" aria-describedby="basic-addon1">
               </div>
               <div class="alert alert-danger p-2" *ngIf="loginForm.controls.email.errors && loginForm.controls.email.touched">
-                <p *ngIf="loginForm.get('email')?.getError('required')">Email Is Required</p>
-                <p *ngIf="loginForm.get('email')?.getError('email')">Email Is Invalid</p>
+                <p *ngIf="loginForm.get('email')?.getError('required')" class="mb-0">Email Is Required</p>
+                <p *ngIf="loginForm.get('email')?.getError('email')" class="mb-0">Email Is Invalid</p>
               </div>
               
               <div class="input-group mb-3 position-relative">
@@ -28,8 +28,8 @@
                   <span class="eye-icon" (click)="hide=!hide"><i class="fa-solid" [class]="hide?'fa-eye-slash':'fa-eye'"></i></span>
               </div>
               <div class="alert alert-danger p-2" *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
-                <p *ngIf="loginForm.get('password')?.getError('required')">Password Is Required</p>
-                <p *ngIf="loginForm.get('password')?.getError('pattern')">Please must have A,a ,@,%,$,#, From 8 , 16</p>
+                <p *ngIf="loginForm.get('password')?.getError('required')" class="mb-0">Password Is Required</p>
+                <p *ngIf="loginForm.get('password')?.getError('pattern')" class="mb-0">Please must have A,a ,@,%,$,#, From 8 , 16</p>
               </div>
               
               <div class="d-flex justify-content-between my-2">

@@ -118,22 +118,6 @@ categoryName: string = '';
       })
 }
 
-// getCategoriesById(id: number){
-//         this._CategoryService.getCategoryById(id).subscribe({
-//           next: (res)=>{
-//             console.log(res);
-//             this.categoryData = res.data;
-//           }, error: (err)=>{
-//             console.log(err);
-//           }, complete: ()=>{
-//             // this.categoryForm.patchValue({
-//             //   name: this.categoryData?.name
-//             // })
-//           }
-//         })
-//       }
-
-
 // Delete
   openDeleteDialog(categoryData: any): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {

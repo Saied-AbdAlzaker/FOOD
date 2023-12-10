@@ -26,9 +26,8 @@ export class FavoritesComponent implements OnInit {
       },error: (err)=>{
         console.log(err);
         this.toastr.error(err.error.message, 'Error!');
-        
       },complete: ()=>{
-        this.toastr.success('Recipe Add To My Favorite', 'Successfully!');
+        // this.toastr.success('Recipe Add To My Favorite', 'Successfully!');
       }
     })
   }
@@ -49,13 +48,16 @@ export class FavoritesComponent implements OnInit {
     })
   }
 
-  pageSize:number = 25;
-  pageNumber:number | undefined = 1;
-  tableResponse:IٌFavoriteTable| undefined;
+  title = 'pagination';
+  usersLists: any[] = [];
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 2;
+  tableSizes: any = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 
-  handlePageEvent(e: PageEvent) {
-    console.log(e);
-    this.pageSize = e.pageSize;
+  onTableDataChange(event: any) {
+    this.tableSize = event.target.value;
+    this.page = event;
     this.getAllFavorites();
   }
 

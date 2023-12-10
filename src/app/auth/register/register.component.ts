@@ -1,11 +1,9 @@
-import { matchPassword } from './../../sheard/custom-validators/custom-validators.component';
 import { VerifyComponent } from './../verify/verify.component';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { RequestResetPasswordComponent } from '../request-reset-password/request-reset-password.component';
 import { AuthService } from '../services/Auth.service';
 @Component({
   selector: 'app-register',
@@ -33,8 +31,20 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl(null, [Validators.required]),
   },
     {
-      validators: matchPassword
+      validators: this.matchPasswords
     })
+
+    matchPasswords(form: any){
+      let password = form.get('password');
+      let confirmPassword = form.get('confirmPassword');
+    
+      if(password.value == confirmPassword.value){
+        return null
+      } else{
+        confirmPassword.setErrors({invalid: 'Password And Confirm Password Not Match'});
+        return {invalid: 'Password And Confirm Password Not Match'};
+      }
+    }
 
   Message: string = '';
   onSubmit(data: FormGroup) {
@@ -57,8 +67,6 @@ export class RegisterComponent implements OnInit {
       myData.append('profileImage', this.imgSrc, this.imgSrc.name);
 
     }
-
-
 
     this._AuthService.onRegister(myData).subscribe({
       next: (res: any) => {

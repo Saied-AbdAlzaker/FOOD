@@ -1,5 +1,5 @@
 import { GlobalInterceptor } from './interceptors/global.interceptor';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SheardModule } from './sheard/sheard.module';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -17,13 +18,14 @@ import { SheardModule } from './sheard/sheard.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
     HttpClientModule,
     SheardModule,
     ToastrModule.forRoot({
       closeButton: true,
-      // timeOut: 500,
+      timeOut: 500,
       progressBar: true,
-      // positionClass: 'toast-center-right',
+      positionClass: 'toast-center-right',
     }), // ToastrModule added
   ],
   providers: [
@@ -33,6 +35,7 @@ import { SheardModule } from './sheard/sheard.module';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

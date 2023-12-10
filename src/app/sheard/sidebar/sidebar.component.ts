@@ -1,3 +1,4 @@
+import { LogoutDialogComponent } from './../logout-dialog/logout-dialog.component';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/Auth.service';
@@ -99,11 +100,13 @@ export class SidebarComponent {
     })
   }
 
-  logout(){
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('role');
-    localStorage.removeItem('userName');
-    this._router.navigate(['/auth']);
+
+  // LogoutDialog
+  openLogoutDialog(): void {
+    const dialogRef = this.dialog.open(LogoutDialogComponent, {
+      data: {},
+      width: '40%',
+    });
   }
 
 }

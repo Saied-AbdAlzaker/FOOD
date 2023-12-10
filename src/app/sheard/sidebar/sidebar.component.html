@@ -1,7 +1,7 @@
-<section>
+<section class="vh-100">
     <div class="container-fluid">
         <div class="row">
-            <div class="px-0 bgDark sideBar vh-100" [ngClass]="isOpened?'col-2':'col-1'">
+            <div class="px-0 bgDark sideBar" [ngClass]="isOpened?'col-2':'col-1'">
                 <div>
                     <div class="text-center my-3" (click)="isOpened = !isOpened">
                         <img src="../../../assets/images/logo-admin.png" alt="logo" class="w-50" >
@@ -16,12 +16,12 @@
                     </ng-container>
                     
                     <div class="item text-white bgActive brdr">
-                        <span><i class="fa-solid fa-unlock-keyhole" [ngClass]="{'fa-2x':  !isOpened}"></i></span>
+                        <span><i class="fa-solid fa-unlock-keyhole" [ngClass]="{'fa-2x':  !isOpened}" (click)="openDialog()"></i></span>
                         <span class="mx-3" [ngClass]="{'d-none': !isOpened}" (click)="openDialog()">Change Password</span>
                     </div>
                     <div class="item text-white bgActive">
-                        <span><i class="fa-solid fa-arrow-right-from-bracket" [ngClass]="{'fa-2x':  !isOpened}" (click)="logout()"></i></span>
-                        <span class="mx-3" [ngClass]="{'d-none': !isOpened}" (click)="logout()">Logout</span>
+                        <span><i class="fa-solid fa-arrow-right-from-bracket" [ngClass]="{'fa-2x':  !isOpened}" (click)="openLogoutDialog()"></i></span>
+                        <span class="mx-3" [ngClass]="{'d-none': !isOpened}" (click)="openLogoutDialog()">Logout</span>
                     </div>
                 </div>
             </div>

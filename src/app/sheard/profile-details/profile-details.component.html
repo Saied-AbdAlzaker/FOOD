@@ -1,0 +1,23 @@
+<div class="text-center">
+  <h1 class="text-body">{{currentUser.userName}}</h1>
+  <div class="user-profile">
+    <img *ngIf="currentUser.imagePath" [src]="'https://upskilling-egypt.com/'+currentUser.imagePath" alt="logo-admin"
+      class="avatar w-25 rounded-circle">
+    <img *ngIf="!currentUser.imagePath" src="../../../assets/images/profile.jpg" alt="logo-admin"
+      class="avatar w-25 rounded-circle">
+    <div class="h3 text-muted">{{currentUser.group.name}}</div>
+    <div class="h5 text-info"> <span class="text-body">Email:</span>
+      {{currentUser.email}}
+    </div>
+    <div class="h5 text-info"> <span class="text-body">Country:</span>
+      {{currentUser.country}}
+    </div>
+    <div class="h5 text-info"> <span class="text-body">Phone Number:</span>
+      {{currentUser.phoneNumber}}
+    </div>
+
+  </div>
+
+  <button routerLink="/profile-edit" class="btn btn-outline-success px-3 my-3">Edit</button>
+
+</div>

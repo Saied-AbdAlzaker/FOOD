@@ -1,12 +1,16 @@
 <div id="navbar">
     <div class="container">
         <div class="row">
-            <div class="col-3 ms-auto">
-                <div class="user-profile d-flex align-items-center">
-                    <div class="userAvatar">
-                        <img src="../../../assets/images/logo-search.png" alt="logo-admin" class="w-100 rounded-circle">
+            <div class="col-3 ms-auto cursor" routerLink="/profile-details">
+                <div class="user-profile d-flex align-items-center" *ngIf="currentUser">
+                    <div class="userAvatar mx-2">
+                        <img *ngIf="currentUser.imagePath" [src]="'https://upskilling-egypt.com/'+currentUser.imagePath" alt="logo-admin" class="w-100 rounded-circle">
+                        <img *ngIf="!currentUser.imagePath" src="../../../assets/images/profile.jpg" alt="logo-admin" class="w-100 rounded-circle">
                     </div>
-                    <span>{{userName}}</span>
+                    <span>
+                        <span class="h6">{{currentUser.userName}}</span>
+                        <span class="d-block text-muted">{{currentUser.group.name}}</span>
+                    </span>
                 </div>
             </div>
         </div>

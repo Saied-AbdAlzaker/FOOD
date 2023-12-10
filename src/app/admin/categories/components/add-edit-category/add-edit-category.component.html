@@ -1,15 +1,15 @@
 <div class="card-auth p-5">
     <h4 class="d-flex align-items-center justify-content-between mb-5">
-        <span>Add Category</span>
+        <span *ngIf="!data.categoryName">Add Category</span>
+        <span *ngIf="data.categoryName">Edit Category</span>
         <span (click)="onNoClick()"><i class="fa-solid fa-xmark" style="color: #f00a0a;"></i></span>
     </h4>
-    <!-- [(ngModel)]="categoryData" -->
-    <!-- <form [formGroup]="categoryForm" (ngSubmit)="onSubmit(categoryForm)"> -->
+
         <div class="input-group mb-3">
-            <input [(ngModel)]="categoryName"  type="text" class="form-control" placeholder="Category Name"
+            <input [(ngModel)]="data.categoryName"  type="text" class="form-control" placeholder="Category Name"
                 aria-label="name" aria-describedby="basic-addon1">
         </div>
 
-        <button [mat-dialog-close]="categoryName" cdkFocusInitial class="btn bg-main text-white w-100">Save</button>
-    <!-- </form> -->
+        <button [mat-dialog-close]="data.categoryName" cdkFocusInitial class="btn bg-main text-white w-100">Save</button>
+
 </div>

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CustomValidatorsComponent } from './custom-validators.component';
+import { ProfileDetailsComponent } from './profile-details.component';
 
-describe('CustomValidatorsComponent', () => {
-  let component: CustomValidatorsComponent;
-  let fixture: ComponentFixture<CustomValidatorsComponent>;
+describe('ProfileDetailsComponent', () => {
+  let component: ProfileDetailsComponent;
+  let fixture: ComponentFixture<ProfileDetailsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomValidatorsComponent ]
+      declarations: [ ProfileDetailsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomValidatorsComponent);
+    fixture = TestBed.createComponent(ProfileDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

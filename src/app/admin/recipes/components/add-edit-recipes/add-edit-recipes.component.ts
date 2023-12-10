@@ -67,7 +67,7 @@ export class AddEditRecipesComponent implements OnInit {
         next: (res)=>{
           console.log(res);
         }, error: (err)=>{
-          this._toastrService.success('Recipe Not Update', 'Ok');
+          this._toastrService.error('Recipe Not Update', 'Ok');
         }, complete: ()=>{
           this._router.navigate(['/dashboard/admin/recipes'])
           this._toastrService.success('Recipe Update Successfully', 'Ok');
