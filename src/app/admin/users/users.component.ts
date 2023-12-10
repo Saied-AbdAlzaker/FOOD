@@ -6,6 +6,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
 import { PageEvent } from '@angular/material/paginator';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-users',
@@ -17,10 +18,16 @@ export class UsersComponent implements OnInit {
   constructor(private _UsersAdminService:UsersAdminService, 
     private _ToastrService:ToastrService,
     private _HelperService:HelperService,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog,
+    private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
-      this.getTableData()
+      this.spinner.show();
+      this.getTableData();
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.spinner.hide();
+      }, 3000);
     }
 
   pageSize: number = 25;

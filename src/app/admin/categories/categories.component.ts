@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEditCategoryComponent } from './components/add-edit-category/add-edit-category.component';
 import { ViewCategoryComponent } from './components/view-category/view-category.component';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-categories',
@@ -22,7 +23,8 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private _CategoryService:CategoryService, 
     private dialog:MatDialog, private _ToastrService:ToastrService,
-    private _ActivatedRoute:ActivatedRoute) {}
+    private _ActivatedRoute:ActivatedRoute,
+    private spinner: NgxSpinnerService) {}
 
   pageSize:number=10;
   pageNumber:number | undefined = 1;
@@ -32,7 +34,12 @@ export class CategoriesComponent implements OnInit {
   searchValue:string = '';
 
   ngOnInit() {
+    this.spinner.show();
     this.getTableData();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 3000);
   }
 
   getTableData() {

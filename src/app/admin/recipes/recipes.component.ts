@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ICategory, ITag, IٌRecipe, IٌRecipeTable } from './models/Recipe';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-recipes',
@@ -17,7 +18,8 @@ export class RecipesComponent implements OnInit {
   constructor(private _RecipesService:RecipesService, 
     private _ToastrService:ToastrService,
     private _HelperService:HelperService,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog,
+    private spinner: NgxSpinnerService) { }
 
   pageSize:number = 25;
   pageNumber:number | undefined = 1;
@@ -31,9 +33,14 @@ export class RecipesComponent implements OnInit {
   searchValue:string = '';
 
   ngOnInit() {
+    this.spinner.show();
     this.getAllTags();
     this.getAllCategories();
     this.getTableData();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 3000);
   }
 
   getTableData() {

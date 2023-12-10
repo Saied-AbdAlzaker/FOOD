@@ -1,10 +1,11 @@
 import { LogoutDialogComponent } from './../logout-dialog/logout-dialog.component';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/Auth.service';
 import { ChangePasswordComponent } from 'src/app/auth/change-password/change-password.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface IMenu{
   title:string,
@@ -18,7 +19,7 @@ interface IMenu{
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
 
   constructor(private _AuthService:AuthService, private _router:Router,public dialog: MatDialog,
     private toastr:ToastrService) {}
@@ -108,5 +109,7 @@ export class SidebarComponent {
       width: '40%',
     });
   }
-
+ngOnInit(): void {
+  
+}
 }

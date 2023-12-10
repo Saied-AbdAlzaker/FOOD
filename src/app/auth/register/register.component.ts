@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/Auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
   constructor(private _AuthService: AuthService,
     private toastr: ToastrService,
     public dialog: MatDialog,
-    private router: Router) { }
+    private router: Router,
+    private spinner: NgxSpinnerService) { }
 
   hide: boolean = true;
   hideConfirm: boolean = true;
@@ -77,8 +79,13 @@ export class RegisterComponent implements OnInit {
         this.toastr.error(err.error.message, 'Error!');
 
       }, complete: () => {
+        this.spinner.show();
         this.openDialog()
         this.toastr.success('Register Success', 'Successfully!');
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 3000);
       }
     })
   }

@@ -1,5 +1,6 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './../../auth/services/Auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 AuthService
 
 @Component({
@@ -7,18 +8,23 @@ AuthService
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
   userName = localStorage.getItem('userName');
 
 
- constructor(private _AuthService:AuthService) {}
+ constructor(private _AuthService:AuthService,
+  private spinner: NgxSpinnerService) {}
 
-  // isAdmin(): boolean {
-  //   return this._AuthService.role == 'SuperAdmin'?true:false;
-  // }
-  // isUser(): boolean {
-  //   return this._AuthService.role == 'SystemUser'?true:false;
-  // }
+  isAdmin(): boolean {
+    return this._AuthService.role == 'SuperAdmin'?true:false;
+  }
 
+  ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 3000);
+  }
 }

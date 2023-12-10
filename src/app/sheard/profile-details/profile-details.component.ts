@@ -4,6 +4,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IRegister } from '../../auth/models/login';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile-details',
@@ -27,7 +28,7 @@ export class ProfileDetailsComponent implements OnInit {
 
   constructor(private _HelperService:HelperService,
     private _toastrService:ToastrService,
-    private _router:Router) {
+    private _router:Router, private spinner: NgxSpinnerService) {
 
     this._HelperService.getCurrentUser().subscribe({
       next: (res)=>{
@@ -49,6 +50,11 @@ export class ProfileDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 3000);
   }
 
 }

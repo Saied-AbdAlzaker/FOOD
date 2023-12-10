@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { IRegister } from 'src/app/auth/models/login';
 import { HelperService } from 'src/app/services/helper.service';
@@ -29,7 +30,7 @@ export class ProfileEditComponent implements OnInit {
 
   constructor(private _HelperService:HelperService,
     private _toastrService:ToastrService,
-    private _router:Router) {
+    private _router:Router, private spinner: NgxSpinnerService) {
 
     this._HelperService.getCurrentUser().subscribe({
       next: (res)=>{
@@ -101,6 +102,11 @@ export class ProfileEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 3000);
   }
 
 }

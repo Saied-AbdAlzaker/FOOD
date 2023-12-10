@@ -5,6 +5,7 @@ import { AuthService } from '../services/Auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private _AuthService:AuthService,
      private toastr:ToastrService, 
      public dialog: MatDialog,
-     private router:Router) { }
+     private router:Router,
+     private spinner: NgxSpinnerService) { }
 
   loginForm = new FormGroup({
     email: new FormControl(null,[Validators.required,Validators.email]),
@@ -36,8 +38,13 @@ export class LoginComponent implements OnInit {
         this.toastr.error(err.error.message, 'Error!');
         
       } , complete: ()=> {
+        this.spinner.show();
         this.router.navigate(['/dashboard'])
         this.toastr.success('Logged In', 'Successfully!');
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 3000);
       }
     })
   }
@@ -67,9 +74,14 @@ export class LoginComponent implements OnInit {
       }, error: (err)=>{
         this.toastr.error(err.error.message, 'Error!');
       },complete: ()=>{
+        this.spinner.show();
         this.toastr.success(this.errorMessage, 'Successfully!');
         this.router.navigate(['/auth/resetPassword']);
         localStorage.setItem('email' , data);
+        setTimeout(() => {
+          /** spinner ends after 5 seconds */
+          this.spinner.hide();
+        }, 3000);
       }
     })
   }
@@ -78,7 +90,7 @@ export class LoginComponent implements OnInit {
   
 
   ngOnInit() {
-    
+
   }
 
 }

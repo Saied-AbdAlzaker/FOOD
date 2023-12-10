@@ -8,6 +8,7 @@ import { RecipesService } from 'src/app/admin/recipes/services/recipes.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { DeleteDialogComponent } from 'src/app/sheard/delete-dialog/delete-dialog.component';
 import { FavoritesService } from '../../favorites/services/favorites.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-user-recipes',
   templateUrl: './user-recipes.component.html',
@@ -20,7 +21,7 @@ export class UserRecipesComponent implements OnInit {
     private _HelperService:HelperService,
     private dialog:MatDialog,
     private _FavoritesService:FavoritesService,
-    private toastr:ToastrService) { }
+    private toastr:ToastrService, private spinner: NgxSpinnerService) { }
 
   pageSize:number = 25;
   pageNumber:number | undefined = 1;
@@ -34,9 +35,14 @@ export class UserRecipesComponent implements OnInit {
   searchValue:string = '';
 
   ngOnInit() {
+    this.spinner.show();
     this.getTableData();
     this.getAllTags();
     this.getAllCategories();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
   }
 
   openViewDialog(recipeItem: IٌRecipe) {

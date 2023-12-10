@@ -8,16 +8,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent implements OnInit{
   title = 'FOOD';
-  // spinnerType: string;
-  // spinnerName: string;
 
-  constructor(private spinner: NgxSpinnerService) {
-
-    // this.spinnerName = 'sp5';
-    // // this.spinnerType = 'square-jelly-box';
-    // this.spinnerType = 'ball-scale-multiple';
-
-  }
+  constructor(private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     /** spinner starts on init */

@@ -3,6 +3,7 @@ import { FavoritesService } from './../services/favorites.service';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { IٌFavoriteTable } from '../models/Favorite';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html',
@@ -10,10 +11,15 @@ import { IٌFavoriteTable } from '../models/Favorite';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor(private _FavoritesService:FavoritesService, private toastr:ToastrService) { }
+  constructor(private _FavoritesService:FavoritesService, private toastr:ToastrService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.getAllFavorites();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
   }
 
   myFavorite: any;
