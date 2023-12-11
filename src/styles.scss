@@ -12,7 +12,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$FOOD-primary: mat.define-palette(mat.$indigo-palette);
+$FOOD-primary: mat.define-palette(mat.$indigo-palette, 500);
 $FOOD-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -25,13 +25,40 @@ $FOOD-theme: mat.define-light-theme((
     primary: $FOOD-primary,
     accent: $FOOD-accent,
     warn: $FOOD-warn,
-  )
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
 ));
+
+$FOOD-theme-dark: mat.define-dark-theme((
+  color: (
+    primary: $FOOD-primary,
+    accent: $FOOD-accent,
+    warn: $FOOD-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// @include mat.all-component-themes($FOOD-theme);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($FOOD-theme);
+.theme-light {
+  @include mat.all-component-colors($FOOD-theme);
+}
+
+.theme-dark {
+  @include mat.all-component-colors($FOOD-theme-dark);
+}
+
+/* Dark Theme Styles */
+.dark-theme {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+}
+
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -106,8 +133,12 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+// .text-main {
+//   color: #4AA35A;
+// }
+
 .text-main {
-  color: #4AA35A;
+  color: #009247;
 }
 
 .text-second {
@@ -126,13 +157,12 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
   background-color: #E2E5EB !important;
 }
 
-#page-header{
+.page-header{
+  color: #fff;
   background-image: url(../src/assets/images/header-bg-svg.svg);
   background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat;
-  border-radius: 2.5rem;
-  color: #fff;
+  border-radius: 15px;
 }
 
 .cursor{
@@ -142,3 +172,4 @@ body { margin: 0; font-family: Inter , Roboto, "Helvetica Neue", sans-serif; }
 .dropdown-toggle::after{
   display: none;
 }
+

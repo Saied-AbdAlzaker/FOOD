@@ -9,10 +9,18 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { SheardModule } from './sheard/sheard.module';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ThemeToggleComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,8 +33,14 @@ import { NgxSpinnerModule } from "ngx-spinner";
       closeButton: true,
       timeOut: 500,
       progressBar: true,
-      positionClass: 'toast-center-right',
-    }), // ToastrModule added
+      // positionClass: 'toast-center-right',
+    }),
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule, // ToastrModule added
+    MatSlideToggleModule
   ],
   providers: [
     {

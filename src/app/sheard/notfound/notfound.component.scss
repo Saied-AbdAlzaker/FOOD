@@ -1,0 +1,25 @@
+.notfound{
+    background-image: url(../../../assets/images/notfound.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .conent{
+        margin-left: 8%;
+    }
+    .btn-content{
+        margin-left: 8%;
+    }
+}
+
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 20px 60px;
+
+    &.primary {
+      background-color: #009247;
+      color: #fff;
+      width: 20%;
+    }
+  }
