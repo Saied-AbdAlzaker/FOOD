@@ -31,9 +31,8 @@ import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
     SheardModule,
     ToastrModule.forRoot({
       closeButton: true,
-      timeOut: 500,
+      timeOut: 5000,
       progressBar: true,
-      // positionClass: 'toast-center-right',
     }),
     MatToolbarModule,
     MatButtonModule,
