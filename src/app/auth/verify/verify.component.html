@@ -3,31 +3,31 @@
   <p>Please Enter Your Email And Check Your Inbox</p>
 
   <form [formGroup]="verifyForm" (ngSubmit)="onSubmit(verifyForm)">
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
-    <input formControlName="email" type="text" class="form-control" placeholder="Enter Your Email"
-      aria-label="email" aria-describedby="basic-addon1">
-  </div>
-  <div class="alert alert-danger p-2" *ngIf="verifyForm.controls.email.errors && verifyForm.controls.email.touched">
-    <p *ngIf="verifyForm.get('email')?.getError('required')">Email Is Required</p>
-    <p *ngIf="verifyForm.get('email')?.getError('email')">Email Is Invalid</p>
-  </div>
-
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
-    <input formControlName="code" type="text" class="form-control" placeholder="Enter Your Otp"
-      aria-label="code" aria-describedby="basic-addon1">
-  </div>
-  <div class="alert alert-danger p-2" *ngIf="verifyForm.controls.code.errors && verifyForm.controls.code.touched">
-    <p *ngIf="verifyForm.get('code')?.getError('required')">OTP Is Required</p>
-    <p *ngIf="verifyForm.get('code')?.getError('code')">OTP Is Invalid</p>
-  </div>
-
-  <div class="text-end my-2">
-      <a routerLink="/auth/resetPassword" (click)="onNoClick()"  class="text-second text-decoration-none">Have Code?</a>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+      <input formControlName="email" type="text" class="form-control" placeholder="Enter Your Email" aria-label="email"
+        aria-describedby="basic-addon1">
+    </div>
+    <div class="alert alert-danger p-2" *ngIf="verifyForm.controls.email.errors && verifyForm.controls.email.touched">
+      <p *ngIf="verifyForm.get('email')?.getError('required')">Email Is Required</p>
+      <p *ngIf="verifyForm.get('email')?.getError('email')">Email Is Invalid</p>
     </div>
 
-  <button [disabled]="verifyForm.invalid" cdkFocusInitial class="btn bg-main text-white w-100">Send</button>
-</form>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-envelope"></i></span>
+      <input formControlName="code" type="text" class="form-control" placeholder="Enter Your Otp" aria-label="code"
+        aria-describedby="basic-addon1">
+    </div>
+    <div class="alert alert-danger p-2" *ngIf="verifyForm.controls.code.errors && verifyForm.controls.code.touched">
+      <p *ngIf="verifyForm.get('code')?.getError('required')">OTP Is Required</p>
+      <p *ngIf="verifyForm.get('code')?.getError('code')">OTP Is Invalid</p>
+    </div>
+
+    <div class="text-end my-2">
+      <a routerLink="/auth/resetPassword" (click)="onNoClick()" class="text-second text-decoration-none">Have Code?</a>
+    </div>
+
+    <button [disabled]="verifyForm.invalid" cdkFocusInitial class="btn bg-main text-white w-100">Send</button>
+  </form>
 
 </div>

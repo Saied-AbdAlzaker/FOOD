@@ -30,15 +30,15 @@ export class LoginComponent implements OnInit {
     this._AuthService.onLogin(data.value).subscribe({
       next: (res: any)=> {
         this.Message = res.message;
-        
         localStorage.setItem('userToken',res.token);
-        this._AuthService.getProfile();
+        
       }, error: (err: any)=> {
         console.log(err);
         this.toastr.error(err.error.message, 'Error!');
         
       } , complete: ()=> {
         this.spinner.show();
+        this._AuthService.getProfile();
         this.router.navigate(['/dashboard'])
         this.toastr.success('Logged In', 'Successfully!');
         setTimeout(() => {
