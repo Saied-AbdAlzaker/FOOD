@@ -111,9 +111,14 @@
                 <a routerLink="/auth/login" class="text-main text-decoration-none">Login Now?</a>
               </div>
               
-              <div class="text-center">
+              <div class="text-center" *ngIf="isLoading==false">
                 <button class="primary w-50">Register</button>
               </div>
+             <div class="text-center" *ngIf="isLoading==true">
+              <button class="primary w-50" >
+                <app-button-loader></app-button-loader>
+              </button>
+             </div>
             </form>
   
           </div>

@@ -31,7 +31,7 @@ import { ThemeToggleComponent } from './theme-toggle/theme-toggle.component';
     SheardModule,
     ToastrModule.forRoot({
       closeButton: true,
-      timeOut: 5000,
+      timeOut: 1500,
       progressBar: true,
     }),
     MatToolbarModule,

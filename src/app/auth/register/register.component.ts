@@ -22,6 +22,8 @@ export class RegisterComponent implements OnInit {
   hide: boolean = true;
   hideConfirm: boolean = true;
   imgSrc: any;
+  Message: string = 'Register Success';
+  isLoading:boolean = false;
 
   registerForm = new FormGroup({
     userName: new FormControl(null, [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9_]{1}[_a-zA-Z0-9\\s]{5,14}$')]),
@@ -48,40 +50,44 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-  Message: string = '';
   onSubmit(data: FormGroup) {
+    this.isLoading = true;
     let myData = new FormData();
-    // myData.append('userName',data.value.userName);
-    // myData.append('email',data.value.email);
-    // myData.append('country',data.value.country);
-    // myData.append('phoneNumber',data.value.phoneNumber);
-    // myData.append('profileImage',this.imgSrc,this.imgSrc.name);
-    // myData.append('password',data.value.password);
-    // myData.append('confirmPassword',data.value.confirmPassword);
+    myData.append('userName',data.value.userName);
+    myData.append('email',data.value.email);
+    myData.append('country',data.value.country);
+    myData.append('phoneNumber',data.value.phoneNumber);
+    myData.append('profileImage',this.imgSrc,this.imgSrc.name);
+    myData.append('password',data.value.password);
+    myData.append('confirmPassword',data.value.confirmPassword);
 
     // console.log(data.value);
-    let myMap = new Map(Object.entries(data.value));
-    console.log(myMap);
-    for (const [key, val] of myMap) {
-      console.log(key, val);
-      myData.append(key, data.value[key]);
-      // myData.append(key , JSON.stringify(val));
-      myData.append('profileImage', this.imgSrc, this.imgSrc.name);
+    // let myMap = new Map(Object.entries(data.value));
+    // console.log(myMap);
+    // for (const [key, val] of myMap) {
+    //   console.log(key, val);
+    //   myData.append(key, data.value[key]);
+    //   // myData.append(key , JSON.stringify(val));
+    //   myData.append('profileImage', this.imgSrc, this.imgSrc.name);
 
-    }
+    // }
 
     this._AuthService.onRegister(myData).subscribe({
       next: (res: any) => {
         console.log(res);
 
       }, error: (err: any) => {
+        this.isLoading = false;
+
         console.log(err);
         this.toastr.error(err.error.message, 'Error!');
 
       }, complete: () => {
         this.spinner.show();
+        this.isLoading = false;
+
         this.openDialog()
-        this.toastr.success('Register Success', 'Successfully!');
+        this.toastr.success( this.Message, 'Successfully!');
         setTimeout(() => {
           /** spinner ends after 5 seconds */
           this.spinner.hide();

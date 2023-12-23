@@ -21,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ButtonLoaderComponent } from './button-loader/button-loader.component';
 
 const routes: Routes = []
 
@@ -50,7 +51,8 @@ const routes: Routes = []
     ProfileDetailsComponent, 
     ProfileEditComponent, 
     NotfoundComponent, 
-    DarkThemeComponent],
+    DarkThemeComponent,
+  ButtonLoaderComponent],
 
   exports: [
     MatButtonModule, 
@@ -73,7 +75,8 @@ const routes: Routes = []
     ProfileDetailsComponent, 
     ProfileEditComponent, 
     NotfoundComponent, 
-    MatSlideToggleModule],
+    MatSlideToggleModule,
+    ButtonLoaderComponent],
     
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

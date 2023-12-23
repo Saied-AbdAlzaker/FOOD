@@ -16,12 +16,12 @@ export class VerifyComponent implements OnInit {
     private _AuthService:AuthService, private toastr:ToastrService,
     private router:Router) {}
 
-  message:string='';
+  Message:string='Register Success';
   userEmail = localStorage.getItem('email');
 
   verifyForm = new FormGroup({
     email: new FormControl(this.userEmail,[Validators.required,Validators.email]),
-    code: new FormControl(null,[Validators.required,Validators.pattern('')]),
+    code: new FormControl(null,[Validators.required]),
   })
 
   onNoClick(): void {
@@ -31,21 +31,19 @@ export class VerifyComponent implements OnInit {
   ngOnInit() {
   }
 
-  Message:string='';
-
   onSubmit(data: FormGroup){
     console.log(data.value);
 
     this._AuthService.onVerifyAccount(data.value).subscribe({
       next: (res)=>{
         console.log(res);
-        // this.Message = res.message;
+
       }, error: (err)=>{
         this.toastr.error(err.error.message, 'Error!');
 
       }, complete: ()=>{
         this.router.navigate(['/auth/login'])
-        this.toastr.success('Register Success', 'Successfully!');
+        this.toastr.success(this.Message, 'Successfully!');
       }
     })
   }

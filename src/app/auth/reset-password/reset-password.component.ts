@@ -22,6 +22,9 @@ export class ResetPasswordComponent implements OnInit {
     seed: new FormControl(null,[Validators.required]),
     password: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
     confirmPassword: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
+  },
+  {
+    validators: this.matchPasswords
   })
 
   onSubmit(data: FormGroup){
@@ -42,6 +45,18 @@ export class ResetPasswordComponent implements OnInit {
 
   hide:boolean = true;
   hideConfirm:boolean = true;
+
+  matchPasswords(form: any){
+    let password = form.get('password');
+    let confirmPassword = form.get('confirmPassword');
+  
+    if(password.value == confirmPassword.value){
+      return null
+    } else{
+      confirmPassword.setErrors({invalid: 'New Password And Confirm Password Not Match'});
+      return {invalid: 'New Password And Confirm Password Not Match'};
+    }
+  }
 
 
   ngOnInit() {

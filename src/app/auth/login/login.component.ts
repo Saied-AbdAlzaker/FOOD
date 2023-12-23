@@ -14,30 +14,36 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _AuthService:AuthService,
-     private toastr:ToastrService, 
-     public dialog: MatDialog,
-     private router:Router,
-     private spinner: NgxSpinnerService) { }
+  constructor(private _AuthService: AuthService,
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private router: Router,
+    private spinner: NgxSpinnerService) { }
 
   loginForm = new FormGroup({
-    email: new FormControl(null,[Validators.required,Validators.email]),
-    password: new FormControl(null,[Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$')]),
   })
 
-  Message:string='';
-  onSubmit(data: FormGroup){
+  isLoading: boolean = false;
+
+  Message: string = '';
+  onSubmit(data: FormGroup) {
+    this.isLoading = true;
     this._AuthService.onLogin(data.value).subscribe({
-      next: (res: any)=> {
+      next: (res: any) => {
         this.Message = res.message;
-        localStorage.setItem('userToken',res.token);
-        
-      }, error: (err: any)=> {
+        localStorage.setItem('userToken', res.token);
+
+      }, error: (err: any) => {
         console.log(err);
+        this.isLoading = false;
+
         this.toastr.error(err.error.message, 'Error!');
-        
-      } , complete: ()=> {
+      }, complete: () => {
         this.spinner.show();
+        this.isLoading = false;
+        
         this._AuthService.getProfile();
         this.router.navigate(['/dashboard'])
         this.toastr.success('Logged In', 'Successfully!');
@@ -51,7 +57,7 @@ export class LoginComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(RequestResetPasswordComponent, {
-      data: { },
+      data: {},
       width: '40%',
     });
 
@@ -62,22 +68,22 @@ export class LoginComponent implements OnInit {
 
   }
 
-  errorMessage:string='';
-  onRquestReset(data: string){
+  errorMessage: string = '';
+  onRquestReset(data: string) {
     // let dataObj = {
     //   email: data
     // }
-    
+
     this._AuthService.onRequestResetPassword(data).subscribe({
-      next: (res: any)=>{
+      next: (res: any) => {
         this.errorMessage = res.message;
-      }, error: (err)=>{
+      }, error: (err) => {
         this.toastr.error(err.error.message, 'Error!');
-      },complete: ()=>{
+      }, complete: () => {
         this.spinner.show();
         this.toastr.success(this.errorMessage, 'Successfully!');
         this.router.navigate(['/auth/resetPassword']);
-        localStorage.setItem('email' , data);
+        localStorage.setItem('email', data);
         setTimeout(() => {
           /** spinner ends after 5 seconds */
           this.spinner.hide();
@@ -86,8 +92,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  hide:boolean = true;
-  
+  hide: boolean = true;
+
 
   ngOnInit() {
 

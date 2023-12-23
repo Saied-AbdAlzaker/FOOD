@@ -17,21 +17,22 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CategoriesComponent implements OnInit {
 
-  categoryId:any;
+  categoryId: any;
   categoryData: ICategory | any;
-  isUpdatePage:boolean = false;
+  isUpdatePage: boolean = false;
+  isLoading: boolean = false;
 
-  constructor(private _CategoryService:CategoryService, 
-    private dialog:MatDialog, private _ToastrService:ToastrService,
-    private _ActivatedRoute:ActivatedRoute,
-    private spinner: NgxSpinnerService) {}
+  constructor(private _CategoryService: CategoryService,
+    private dialog: MatDialog, private _ToastrService: ToastrService,
+    private _ActivatedRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService) { }
 
-  pageSize:number=10;
-  pageNumber:number | undefined = 1;
-  tableResponse:ICategoryTable | undefined;
-  tableData:ICategory[] = [];
+  pageSize: number = 10;
+  pageNumber: number | undefined = 1;
+  tableResponse: ICategoryTable | undefined;
+  tableData: ICategory[] = [];
 
-  searchValue:string = '';
+  searchValue: string = '';
 
   ngOnInit() {
     this.spinner.show();
@@ -63,7 +64,7 @@ export class CategoriesComponent implements OnInit {
     this.pageSize = e.pageSize;
     this.pageNumber = this.tableResponse?.pageNumber;
     this.getTableData();
-    
+
     // this.pageEvent = e;
     // this.length = e.length;
     // this.pageSize = e.pageSize;
@@ -72,7 +73,7 @@ export class CategoriesComponent implements OnInit {
 
   openAddDialog(): void {
     const dialogRef = this.dialog.open(AddEditCategoryComponent, {
-      data: { },
+      data: {},
       width: '40%',
     });
 
@@ -82,50 +83,50 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  onAddNewCategory(data: String){
+  onAddNewCategory(data: String) {
     this._CategoryService.addCategories(data).subscribe({
       next: (res) => {
         console.log(res);
-      }, error: (err)=>{
+      }, error: (err) => {
         console.log(err);
-      }, complete: ()=>{
+      }, complete: () => {
         this._ToastrService.success('Category Added Successfully', 'Ok');
         this.getTableData();
       }
-      })
-}
-categoryName: string = '';
+    })
+  }
+  categoryName: string = '';
 
-// Edit
+  // Edit
   openEditDialog(categoryData: any): void {
     const dialogRef = this.dialog.open(AddEditCategoryComponent, {
-      data: {categoryName: categoryData.name},
+      data: { categoryName: categoryData.name },
       width: '40%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(categoryData.name,categoryData.id);
-      if(result){
-        this.onEditCategory(result,categoryData.id);
+      console.log(categoryData.name, categoryData.id);
+      if (result) {
+        this.onEditCategory(result, categoryData.id);
       }
     });
   }
 
-  onEditCategory(data:any,id:number){
-    this._CategoryService.editCategories(data,id).subscribe({
+  onEditCategory(data: any, id: number) {
+    this._CategoryService.editCategories(data, id).subscribe({
       next: (res) => {
         console.log(res);
-      }, error: (err)=>{
+      }, error: (err) => {
         console.log(err);
-      }, complete: ()=>{
+      }, complete: () => {
         this._ToastrService.success('Category Edit Successfully', 'Ok');
         this.getTableData();
       }
-      })
-}
+    })
+  }
 
-// Delete
+  // Delete
   openDeleteDialog(categoryData: any): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: categoryData,
@@ -135,39 +136,39 @@ categoryName: string = '';
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // console.log(result);
-      if(result){
+      if (result) {
         // console.log(result.id);
-      this.onDeleteCategory(result.id);
+        this.onDeleteCategory(result.id);
       }
     });
   }
-  onDeleteCategory(id: number){
+  onDeleteCategory(id: number) {
     this._CategoryService.deleteCategories(id).subscribe({
       next: (res) => {
         console.log(res);
-      }, error: (err)=>{
+      }, error: (err) => {
         console.log(err);
-      }, complete: ()=>{
+      }, complete: () => {
         this._ToastrService.success('Category Deleted Successfully', 'Ok');
         this.getTableData();
       }
-      })
-}
+    })
+  }
 
-// View
-openViewDialog(categoryData: any): void {
-  const dialogRef = this.dialog.open(ViewCategoryComponent, {
-    data: categoryData,
-    width: '60%',
-  });
+  // View
+  openViewDialog(categoryData: any): void {
+    const dialogRef = this.dialog.open(ViewCategoryComponent, {
+      data: categoryData,
+      width: '60%',
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    // console.log(result);
-    if(result){
-    this.getTableData();
-    }
-  });
-}
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // console.log(result);
+      if (result) {
+        this.getTableData();
+      }
+    });
+  }
 
 }

@@ -10,6 +10,8 @@ export class AddEditCategoryComponent implements OnInit {
 
   categoryName: string = '';
   isUpdatePage: boolean = false;
+  isLoading: boolean = false;
+
 
   constructor(public dialogRef: MatDialogRef<AddEditCategoryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
