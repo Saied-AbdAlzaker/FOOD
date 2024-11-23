@@ -1,0 +1,119 @@
+<section>
+    <div class="container">
+        <div class="main-body">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                </ol>
+            </nav>
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+                <div class="row gutters-sm" *ngIf="currentUser" >
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body p-5">
+                                <div class="d-flex flex-column align-items-center text-center">
+
+                                    <div class="input-group mb-3 d-flex justify-content-center">
+                                        <ngx-dropzone (change)="onSelect($event)" [multiple]="false" class="w-100">
+                                            <ngx-dropzone-label *ngIf="!imgSrc">
+                                                <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                                                Drag & Drop or <span class="text-main">Choose a Item Image</span> to
+                                                Upload
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-label *ngIf="imgSrc">
+                                                <img [src]="imgSrc" class="w-25" [alt]="imgSrc.name">
+                                            </ngx-dropzone-label>
+                                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                                *ngFor="let f of files" [file]="f" [removable]="true"
+                                                (removed)="onRemove(f)">
+                                            </ngx-dropzone-image-preview>
+                                        </ngx-dropzone>
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <h5>{{currentUser.userName}}</h5>
+                                        <p class="text-secondary mb-1">{{currentUser.email}}</p>
+                                        <p class="text-muted font-size-sm">
+                                            {{currentUser.creationDate | date:'mm-dd-yyyy hh-mm'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div>
+                                <div class="card-body">
+                                    <label for="userName">Full Name</label>
+                                    <input type="text" id="userName" formControlName="userName" class="form-control">
+                                </div>
+                                <div class="alert text-danger p-2"
+                                    *ngIf="userForm.controls.userName.errors && userForm.controls.userName.touched">
+                                    <p *ngIf="userForm.get('userName')?.getError('required')" class="mb-0">User Name Is
+                                        Required</p>
+                                    <p *ngIf="userForm.get('userName')?.getError('pattern')" class="mb-0">The User Name
+                                        Must
+                                        Be Contain Characters And End With Numbers Without Space.</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <label for="email">Email</label>
+                                    <input type="text" id="email" formControlName="email" class="form-control">
+                                </div>
+                                <div class="alert text-danger p-2"
+                                    *ngIf="userForm.controls.email.errors && userForm.controls.email.touched">
+                                    <p *ngIf="userForm.get('email')?.getError('required')" class="mb-0">Email Is
+                                        Required</p>
+                                    <p *ngIf="userForm.get('email')?.getError('pattern')" class="mb-0">The Email Invalid</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <label for="phoneNumber">Phone Number</label>
+                                    <input type="text" id="phoneNumber" formControlName="phoneNumber"
+                                        class="form-control">
+                                </div>
+                                <div class="alert text-danger p-2"
+                                    *ngIf="userForm.controls.phoneNumber.errors && userForm.controls.phoneNumber.touched">
+                                    <p *ngIf="userForm.get('phoneNumber')?.getError('required')" class="mb-0">phoneNumber Is
+                                        Required</p>
+                                    <p *ngIf="userForm.get('phoneNumber')?.getError('pattern')" class="mb-0">The Phone Number Invalid</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <label for="country">Country</label>
+                                    <input type="text" id="country" formControlName="country" class="form-control">
+                                </div>
+                                <div class="alert text-danger p-2"
+                                    *ngIf="userForm.controls.country.errors && userForm.controls.country.touched">
+                                    <p *ngIf="userForm.get('country')?.getError('required')" class="mb-0">country Is
+                                        Required</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input type="text" id="confirmPassword" formControlName="confirmPassword"
+                                        class="form-control">
+                                </div>
+                                <div class="alert text-danger p-2"
+                                    *ngIf="userForm.controls.confirmPassword.errors && userForm.controls.confirmPassword.touched">
+                                    <p *ngIf="userForm.get('confirmPassword')?.getError('required')" class="mb-0">confirmPassword Is
+                                        Required</p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="text-center">
+                            <button class="btn btn-info w-25 text-white">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

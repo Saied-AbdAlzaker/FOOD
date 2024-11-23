@@ -1,0 +1,227 @@
+<section id="register" class="vh-100">
+    <div class="food-content">
+        <div class="container food-box register-box">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <div class="card rounded-3 p-4">
+                        <div class="input-group mb-3 d-flex justify-content-center">
+                            <ngx-dropzone (change)="onSelect($event)" [multiple]="false" class="w-100">
+                                <ngx-dropzone-label *ngIf="!imgSrc">
+                                    <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                                    Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-label *ngIf="imgSrc">
+                                    <img [src]="imgSrc" class="w-25" [alt]="imgSrc.name">
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                                    [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                </ngx-dropzone-image-preview>
+                            </ngx-dropzone>
+                        </div>
+                        <h2 class="m-0">Register</h2>
+                        <p class="text-mainCOlor">Welcome Back! Please enter your details</p>
+
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmitForm(registerForm)">
+                            <div class="row gy-2">
+                                <div class="col-md-6">
+                                    <div class="flex flex-column md:flex-row gap-3">
+                                        <div class="p-inputgroup">
+                                            <span class="p-inputgroup-addon">
+                                                <i class="pi pi-user"></i>
+                                            </span>
+                                            <input pInputText formControlName="userName" placeholder="User Name"
+                                                name="username" />
+                                        </div>
+                                        <div class="alert alert-danger p-2 m-0"
+                                            *ngIf="registerForm.controls.userName.errors && registerForm.controls.userName.touched">
+                                            <p class="mb-0" *ngIf="registerForm.get('userName')?.getError('required')">
+                                                User Name Is Required</p>
+                                            <p class="mb-0" *ngIf="registerForm.get('userName')?.getError('pattern')">
+                                                The
+                                                User Name Must Be Start Capitall leter Contain Characters And End With
+                                                Numbers Without Space.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="flex flex-column md:flex-row gap-3">
+                                        <div class="p-inputgroup">
+                                            <span class="p-inputgroup-addon">
+                                                <i class="fa-regular fa-envelope"></i>
+                                            </span>
+                                            <input pInputText formControlName="email" placeholder="Enter your E-mail"
+                                                name="E-mail" />
+                                        </div>
+                                        <div class="alert alert-danger p-2 m-0"
+                                            *ngIf="registerForm.controls.email.errors && registerForm.controls.email.touched">
+                                            <p class="mb-0" *ngIf="registerForm.get('email')?.getError('required')">
+                                                Email
+                                                Is
+                                                Required</p>
+                                            <p class="mb-0" *ngIf="registerForm.get('email')?.getError('email')">Email
+                                                Is
+                                                Invalid</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="flex flex-column md:flex-row gap-3">
+                                        <div class="p-inputgroup">
+                                            <span class="p-inputgroup-addon">
+                                                <i class="fa-solid fa-globe"></i>
+                                            </span>
+                                            <input pInputText formControlName="country" placeholder="Country"
+                                                name="country" />
+                                        </div>
+                                        <div class="alert alert-danger p-2 m-0"
+                                            *ngIf="registerForm.controls.country.errors && registerForm.controls.country.touched">
+                                            <p class="mb-0" *ngIf="registerForm.get('country')?.getError('required')">
+                                                Country Is Required</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="flex flex-column md:flex-row gap-3">
+                                        <div class="p-inputgroup">
+                                            <span class="p-inputgroup-addon">
+                                                <i class="fa-solid fa-mobile-screen"></i>
+                                            </span>
+                                            <input pInputText formControlName="phoneNumber" placeholder="Phone Number"
+                                                name="PhoneNumber" />
+                                        </div>
+                                        <div class="alert alert-danger p-2 m-0"
+                                            *ngIf="registerForm.controls.phoneNumber.errors && registerForm.controls.phoneNumber.touched">
+                                            <p class="mb-0"
+                                                *ngIf="registerForm.get('phoneNumber')?.getError('required')">
+                                                Phone Number Is Required</p>
+                                            <p class="mb-0"
+                                                *ngIf="registerForm.get('phoneNumber')?.getError('pattern')">
+                                                Phone Number Is Invalid</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-inputgroup">
+                                        <span class="p-inputgroup-addon">
+                                            <i class="pi pi-lock"></i>
+                                        </span>
+                                        <input pInputText formControlName="password" placeholder="Password"
+                                            name="password" [type]="hidePassword?'password':'text'" />
+                                        <span class="p-inputgroup-addon cursor" (click)="hidePassword =! hidePassword">
+                                            <i class="fa-regular" [class]="hidePassword?'fa-eye-slash':'fa-eye'"></i>
+                                        </span>
+                                    </div>
+                                    <div class="alert alert-danger p-2 m-0"
+                                        *ngIf="registerForm.controls.password.errors && registerForm.controls.password.touched">
+                                        <p class="mb-0" *ngIf="registerForm.get('password')?.getError('required')">
+                                            Password Is Required</p>
+                                        <p class="mb-0" *ngIf="registerForm.get('password')?.getError('pattern')">Please
+                                            must have A,a ,%,$,# .. From 8 , 16</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-inputgroup">
+                                        <span class="p-inputgroup-addon">
+                                            <i class="pi pi-lock"></i>
+                                        </span>
+                                        <input pInputText formControlName="confirmPassword"
+                                            placeholder="Confirm Password" name="confirm-password"
+                                            [type]="hideConfirm?'password':'text'" />
+                                        <span class="p-inputgroup-addon cursor" (click)="hideConfirm =! hideConfirm">
+                                            <i class="fa-regular" [class]="hideConfirm?'fa-eye-slash':'fa-eye'"></i>
+                                        </span>
+                                    </div>
+                                    <div class="alert alert-danger p-2 m-0"
+                                        *ngIf="registerForm.controls.confirmPassword.errors && registerForm.controls.confirmPassword.touched">
+                                        <p class="mb-0"
+                                            *ngIf="registerForm.get('confirmPassword')?.getError('required')">
+                                            Confirm Password Is Required</p>
+                                        <p class="mb-0"
+                                            *ngIf="registerForm.get('confirmPassword')?.getError('invalid')">
+                                            Password And Confirm Password Not Match</p>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-md-12">
+                                    <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+                                        <ngx-dropzone-label *ngIf="!imgSrc">
+                                            <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                                            Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+                                        </ngx-dropzone-label>
+                                        <ngx-dropzone-label *ngIf="imgSrc">
+                                            <img [src]="imgSrc" class="w-25" alt="">
+                                        </ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                            *ngFor="let f of files" [file]="f" [removable]="true"
+                                            (removed)="onRemove(f)">
+                                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div> -->
+
+                                <a class="text-secondColor text-decoration-none cursor text-end"
+                                    routerLink="/auth/login">Login Now?</a>
+
+                                <button class="btn bg-secondColor text-white w-50 mx-auto"
+                                     *ngIf="isLoading==false">Register</button>
+
+                                <button class="btn bg-secondColor text-white w-50 mx-auto" *ngIf="isLoading==true"><i
+                                        class="fa fa-refresh fa-spin mx-2"></i> Loading...</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Verify Account -->
+<div class="card flex justify-content-center">
+    <p-dialog header="Verify Account" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+        <form [formGroup]="verifyForm" (ngSubmit)="onSubmit(verifyForm)">
+            <div class="flex flex-column md:flex-row gap-3">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </span>
+                    <input pInputText formControlName="email" placeholder="Email" name="email" />
+                </div>
+                <div class="alert alert-danger p-2 m-0 mt-1"
+                    *ngIf="verifyForm.controls.email.errors && verifyForm.controls.email.touched">
+                    <p class="mb-0" *ngIf="verifyForm.get('email')?.getError('required')">Email Is Required </p>
+                    <p class="mb-0" *ngIf="verifyForm.get('email')?.getError('email')">Email Is Invalid</p>
+                </div>
+            </div>
+
+            <div class="flex flex-column md:flex-row gap-3 my-3">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
+                    <input pInputText formControlName="code" placeholder="Code" name="code" />
+                </div>
+                <div class="alert alert-danger p-2 m-0 mt-1"
+                    *ngIf="verifyForm.controls.code.errors && verifyForm.controls.code.touched">
+                    <p class="mb-0" *ngIf="verifyForm.get('code')?.getError('required')">Code Is Required </p>
+                    <p class="mb-0" *ngIf="verifyForm.get('code')?.getError('code')">Code Is Invalid </p>
+                </div>
+            </div>
+
+            <div class="text-end my-2">
+                <a class="text-secondColor text-decoration-none cursor" routerLink="/auth/reset-password">Have
+                    Code?</a>
+            </div>
+            <div class="d-flex justify-content-end gap-2 m-0">
+                <p-button label="Cancel" severity="secondary" (onClick)="visible = false" />
+
+                <button class="btn bg-secondColor text-white w-100" *ngIf="isLoading==false">Send</button>
+
+                <button class="btn bg-secondColor text-white w-50 mx-auto" *ngIf="isLoading==true">
+                    <i class="fa fa-refresh fa-spin"></i> Loading...
+                </button>
+            </div>
+        </form>
+    </p-dialog>
+</div>

@@ -1,0 +1,11 @@
+@import "/src/assets/styles/abstracts/_variables.scss";
+
+
+#notfound{
+    background-image: url('../../../images/notfound.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    padding: 10px;
+}

@@ -1,0 +1,43 @@
+<section id="navbar" class="bg-navColor">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4 cursor p-3 ms-auto">
+                <div class="d-flex align-items-center">
+                    <a [routerLink]="['/profile']" class="text-decoration-none d-flex" *ngIf="currentUser">
+                        <div class="userAvatar">
+                           <span *ngIf="currentUser.imagePath"> <img [src]="imgSrc + currentUser.imagePath" [alt]="currentUser.userName"
+                            class="w-100 rounded-circle" /></span>
+                           <span *ngIf="!currentUser.imagePath"> <img src="../../../../../assets/images/profile.jpg" alt="profile"
+                            class="w-100 rounded-circle" /></span>
+                        </div>
+                        <div class="mx-2">
+                            <span class="h6">{{ currentUser.userName }}</span>
+                            <span class="d-block text-muted">{{ currentUser.group.name }}</span>
+                        </div>
+                    </a>
+
+                    <td class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fs-5" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <div class="d-flex flex-column align-items-center py-2">
+
+                                <a class="text-decoration-none cursor text-mainColor bgActive"
+                                    [routerLink]="['/profile']"><i class="pi pi-user me-2"></i>Profile</a>
+
+                                <a class="text-decoration-none cursor text-mainColor bgActive my-3"
+                                    (click)="openChangePasswordDialog()"><i class="pi pi-lock me-2"></i>Change
+                                    Password</a>
+
+                                <a class="text-decoration-none cursor text-mainColor bgActive"
+                                    (click)="openLogoutDialog()"><i class="pi pi-sign-out me-2"></i>Logout</a>
+
+                            </div>
+                        </ul>
+                    </td>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

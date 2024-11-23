@@ -1,0 +1,13 @@
+@import "/src/assets/styles/abstracts/_variables.scss";
+
+.bgActive:hover {
+    background-color: $bg-sidebar !important;
+}
+
+.sidebar {
+    border-top-right-radius: 58px;
+}
+
+.row > div {
+    transition: all 1s;
+}

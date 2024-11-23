@@ -1,0 +1,18 @@
+<section class="rounded-4 p-5">
+    <div class="text-end">
+        <span (click)="onNoClick()" class="cursor"><i class="pi pi-times" style="color: #f00a0a"></i></span>
+    </div>
+    <div class="text-center">
+        <img src="../../../../../../../../assets/images/logo-admin.png" alt="logo" class="w-25">
+    </div>
+    <div>
+        <h2 class="fw-bold" *ngIf="!categoryName">Add Category</h2>
+        <h2 class="fw-bold" *ngIf="categoryName">Edit Category</h2>
+        <input [(ngModel)]="categoryName" type="text" class="form-control" placeholder="Category Name" aria-label="name"
+            aria-describedby="basic-addon1">
+    </div>
+
+    <button [mat-dialog-close]="categoryName" cdkFocusInitial
+        class="btn bg-secondColor text-white w-100 mt-3">Save</button>
+
+</section>

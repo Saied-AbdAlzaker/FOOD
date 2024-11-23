@@ -1,0 +1,84 @@
+<section id="home" class="rounded-4 ">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="text-white">
+                <div class="ms-5">
+                    <h2 class="fw-bolder fs-1">Categories <span class="text-grayColor fs-3">Item</span></h2>
+                    <p>You can now add your items that any user can order it from the Application and you can edit</p>
+                </div>
+            </div>
+            <div>
+                <img src="../../../../../../assets/images/category-avatar.svg" class="w-100" alt="category">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container my-3">
+        <div class="row d-flex align-items-center">
+            <div class="col-4">
+                <h2 class="mb-0">Categories Table Details</h2>
+                <p>You can check all details</p>
+            </div>
+            <div class="col-4">
+                <input [(ngModel)]="searchValue" (keyup)="getAllCategory()" type="text" class="form-control"
+                    placeholder="Search By Name">
+            </div>
+            <div class="col-4 text-end">
+                <button pButton pRipple class="p-button-success me-5 px-3"
+                    (click)="openAddDialog('1000ms', '1000ms')">Add New Category</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <p-table [value]="tableData" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+            [rowsPerPageOptions]="[5, 10, 15]" styleClass="p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Category Date</th>
+                    <th>Modification Date</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-tableData>
+                <tr>
+                    <td>{{ tableData.name }}</td>
+                    <td>{{ tableData.creationDate | date:'dd-mm-yyyy , hh:mm:a'}}</td>
+                    <td>{{ tableData.modificationDate | date:'dd-mm-yyyy , hh:mm:a' }}</td>
+                    <td class="nav-item dropdown">
+                        <a class="nav-link" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i
+                                class="pi pi-ellipsis-h"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <div class="d-flex flex-column align-items-center py-2">
+
+                                <a class="text-decoration-none cursor text-mainColor bgActive"
+                                    (click)="openViewDialog(tableData,'1000ms', '1000ms')">
+                                    <i class="pi pi-eye me-2"></i>View</a>
+
+                                <a class="text-decoration-none cursor text-mainColor bgActive my-3"
+                                    (click)="openEditDialog(tableData,'1000ms', '1000ms')"><i
+                                        class="pi pi-pen-to-square me-2"></i>Edit</a>
+
+                                <a class="text-decoration-none cursor text-mainColor bgActive"
+                                    (click)="openDeleteDialog(tableData,'1000ms', '1000ms')"><i
+                                        class="pi pi-trash me-2"></i>Delete</a>
+
+                            </div>
+                        </ul>
+                    </td>
+                </tr>
+            </ng-template>
+            <div *ngIf="tableData.length == 0" class="text-center">
+                <img src="../../../assets/images/delete-img.svg" alt="delete" class="w-25">
+                <h4>No Data !</h4>
+                <p class="text-muted">are you sure you want to delete this item ? if you are sure just <br>click on
+                    delete
+                    it</p>
+            </div>
+        </p-table>
+    </div>
+</section>

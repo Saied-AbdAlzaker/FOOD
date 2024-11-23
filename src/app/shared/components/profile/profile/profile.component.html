@@ -1,0 +1,98 @@
+<section>
+    <div class="container">
+        <div class="main-body">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/dashboard']">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                </ol>
+            </nav>
+            <div class="row gutters-sm" *ngIf="currentUser" >
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <div class="userAvatar">
+                                    <span *ngIf="currentUser.imagePath"> <img [src]="imgSrc + currentUser.imagePath" [alt]="currentUser.userName"
+                                     class="w-100 rounded-circle" /></span>
+                                    <span *ngIf="!currentUser.imagePath"> <img src="../../../../../assets/images/profile.jpg" alt="profile"
+                                     class="w-100 rounded-circle" /></span>
+                                 </div>
+                                <div class="mt-3">
+                                    <h5>{{currentUser.userName}}</h5>
+                                    <p class="text-secondary mb-1">{{currentUser.email}}</p>
+                                    <p class="text-muted font-size-sm">{{currentUser.creationDate}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Full Name</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{currentUser.userName}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">ID</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{currentUser.id}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Email</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{currentUser.email}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Phone</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{currentUser.phoneNumber}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Country</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{currentUser.country}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="mb-0">Group</h5>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{currentUser?.group.name}}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <a class="btn btn-info w-25 text-white" 
+                                    [routerLink]="['/profile/edit-profile']">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

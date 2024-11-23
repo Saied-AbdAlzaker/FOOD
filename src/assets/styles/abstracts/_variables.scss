@@ -1,0 +1,36 @@
+$mainColor: #1F263E;
+$secondColor:#009247;
+$navColor: #F8F9FB;
+$sideColor: rgba(0, 146, 71, 0.1);
+$grayColor: rgba(223, 224, 224, 1);
+
+
+$bg-main:$mainColor;
+$bg-second:$secondColor;
+$bg-navbar:$navColor;
+$bg-sidebar:$sideColor;
+$bg-gray:$grayColor;
+
+$text-main:$mainColor;
+$text-second:$secondColor;
+$text-grayColor:$grayColor;
+
+.bg-mainColor{
+    background-color: $bg-main;
+}
+.bg-secondColor{
+    background-color: $bg-second;
+}
+.bg-navColor{
+    background-color: $bg-navbar;
+}
+
+.text-mainColor{
+    color: $text-main;
+}
+.text-secondColor{
+    color: $text-second;
+}
+.text-grayColor{
+    color: $text-grayColor;
+}

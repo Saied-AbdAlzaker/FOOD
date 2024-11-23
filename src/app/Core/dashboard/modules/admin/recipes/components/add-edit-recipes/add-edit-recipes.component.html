@@ -1,0 +1,81 @@
+<section class="my-3">
+    <div class="container">
+        <div class="row bg-navColor p-3 rounded-3">
+            <div class="col-md-8">
+                <h4 class="fw-bolder fs-1" *ngIf="!isUpdate">Fill the <span class="text-secondColor fs-3">Recipes !
+                    </span></h4>
+                <h4 class="fw-bolder fs-1" *ngIf="isUpdate">Edit the <span class="text-secondColor fs-3">Recipes !
+                    </span></h4>
+                <p class="w-75">you can now fill the meals easily using the table and form , click here and sill it with
+                    the table !
+                </p>
+            </div>
+            <div class="col-md-4 text-center m-auto">
+                <button pButton pRipple class="p-button-success me-5 px-3"
+                    [routerLink]="['/dashboard/admin/recipes']">All Recipes <i
+                        class="fa-solid fa-arrow-right mx-2"></i></button>
+            </div>
+        </div>
+
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit(recipeForm)">
+            <div class="row my-3">
+                <div class="col-md-10 mx-auto">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-user"></i></span>
+                        <input formControlName="name" type="text" class="form-control" placeholder="Recipe Name"
+                            aria-label="recipe" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-tags"></i></span>
+                        <select class="form-select" formControlName="tagId" aria-label="Default select example">
+                            <option selected>Tag</option>
+                            <option *ngFor="let tagItem of tags" [ngValue]="tagItem.id">{{tagItem.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input formControlName="price" type="number" class="form-control" placeholder="350.99"
+                            aria-label="recipe" aria-describedby="basic-addon1">
+                        <span class="input-group-text" id="basic-addon1">EGP</span>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-table-cells"></i></span>
+                        <select class="form-select" formControlName="categoriesIds" aria-label="Default select example">
+                            <option selected>Category</option>
+                            <option *ngFor="let categoryItem of categories" [ngValue]="categoryItem.id">
+                                {{categoryItem.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-marker"></i></span>
+                        <textarea formControlName="description" type="text" class="form-control"
+                            placeholder="Description" aria-label="description"
+                            aria-describedby="basic-addon1"> </textarea>
+                    </div>
+                    <div class="input-group mb-3 d-flex justify-content-center">
+                        <ngx-dropzone (change)="onSelect($event)" [multiple]="false" class="w-100">
+                            <ngx-dropzone-label *ngIf="!imgSrc">
+                                <i class="fa-solid fa-arrow-up-from-bracket d-block"></i>
+                                Drag & Drop or <span class="text-main">Choose a Item Image</span> to Upload
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-label *ngIf="imgSrc">
+                                <img [src]="imgSrc" class="w-25" [alt]="imgSrc.name">
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                                [file]="f" [removable]="true" (removed)="onRemove(f)">
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="outline-primary w-25" type="button"
+                            [routerLink]="['/dashboard/admin/recipes']">Cancel</button>
+                        <button class="primary w-25 mx-3">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>

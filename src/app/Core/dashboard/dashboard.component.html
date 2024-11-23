@@ -1,0 +1,27 @@
+<aside id="dashboard" class="h-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="bg-mainColor sidebar px-0" [ngClass]="isOpened?'col-2':'col-1'">
+                <div class="text-center mt-2 mb-5" (click)="isOpened = !isOpened">
+                    <span *ngIf="isAdmin()"><img src="../../../../../assets/images/logo-admin.png" class="w-75" alt="logo"></span>
+                    <span *ngIf="isUser()"><img src="../../../assets/images/Group.png"  alt="Group"></span>
+                </div>
+              
+                <ng-container *ngFor="let item of menu">
+                    <a [routerLink]="item.link" *ngIf="item.isActive"
+                        class="text-decoration-none bgActive rounded-3 d-block">
+                        <div class="text-white d-flex align-items-center cursor justify-content-center py-3">
+                            <span><i [class]="item.icon" [ngClass]="{'fs-5': !isOpened}"></i></span>
+                            <span class="mx-3" [ngClass]="{'d-none': !isOpened}">{{item.title}}</span>
+                        </div>
+                    </a>
+                </ng-container>
+            </div>
+
+            <div class="py-2 shadow" [ngClass]="isOpened?'col-10':'col-11'">
+                <app-navbar></app-navbar>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</aside>

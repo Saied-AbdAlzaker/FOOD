@@ -1,0 +1,26 @@
+<section class="rounded-4 p-3">
+    <div class="container">
+        <div class="text-end">
+            <span (click)="onNoClick()" class="cursor"><i class="pi pi-times" style="color: #f00a0a"></i></span>
+        </div>
+        <div class="text-center">
+            <img src="../../../../../../../../assets/images/logo-admin.png" alt="logo" class="w-25">
+        </div>
+        <h2>View This Item <span class="text-success">{{data.name}}</span> </h2>
+
+        <table class="table table-active">
+            <thead>
+                <th style="width:25%">Name</th>
+                <th style="width:25%">Category Date</th>
+                <th style="width:25%">Modification Date</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.creationDate | date:'dd-mm-yyyy , hh:mm:a'}}</td>
+                    <td>{{ data.modificationDate | date:'dd-mm-yyyy , hh:mm:a' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

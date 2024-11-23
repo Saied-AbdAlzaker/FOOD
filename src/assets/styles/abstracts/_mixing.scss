@@ -1,0 +1,76 @@
+@import "./variables";
+
+.cursor {
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+
+  &.primary {
+    background-color: #009247;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &.outline-primary {
+    border: 1px solid #4AA35A;
+    color: #4AA35A;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+
+//form field
+::ng-deep .mat-mdc-text-field-wrapper {
+  border: 1px solid #D0D5DD !important;
+  border-radius: 10px !important;
+
+}
+
+::ng-deep .mat-mdc-text-field-wrapper:focus {
+  border: 50px solid #006EC4 !important;
+}
+
+._ngcontent-ng-c948093861 {
+  padding-top: 0px !important;
+}
+
+ngx-dropzone[_nghost-ng-c2040221903] {
+  border: none !important;
+  width: 50% !important;
+  height: 50% !important;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 99999;
+  width: 30px;
+  height: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #1f263e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.delete-icon:hover{
+  background-color: #cd5757;
+}
+i:hover{
+  color: #fff;
+}
+.img-fav{
+  max-height: 200px;
+}

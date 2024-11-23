@@ -1,0 +1,16 @@
+@import "/src/assets/styles/abstracts/_variables.scss";
+
+
+#navbar{
+    
+    .userAvatar{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+}
+
+.bgActive:hover {
+    background-color: $bg-navbar ;
+}
+

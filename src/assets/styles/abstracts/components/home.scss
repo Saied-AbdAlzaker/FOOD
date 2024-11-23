@@ -1,0 +1,13 @@
+@import "/src/assets/styles/abstracts/_variables.scss";
+
+#home{
+    background-image: url('../../../images/header-bg-svg.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 20px 0px;
+
+    p{
+        width: 65%;
+    }
+
+}
