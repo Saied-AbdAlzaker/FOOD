@@ -1,97 +1,180 @@
 <section id="food" class="vh-100">
-    <div class="food-content">
-        <div class="container food-box">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <div class="card rounded-3 p-4">
-                        <div class="text-center">
-                            <img src="../../../../../assets/images/logo.svg" class="w-50 mb-3" alt="">
-                        </div>
-                        <h2 class="mb-0">login</h2>
-                        <p class="text-mainCOlor">Welcome Back! Please enter your details</p>
-
-                        <form [formGroup]="loginForm" (ngSubmit)="onSubmitForm(loginForm)">
-                            <div class="flex flex-column md:flex-row gap-2">
-                                <div class="p-inputgroup">
-                                    <span class="p-inputgroup-addon">
-                                        <i class="pi pi-user"></i>
-                                    </span>
-                                    <input pInputText formControlName="email" placeholder="Username" name="username" />
-                                </div>
-                                <div class="alert alert-danger p-2 m-0"
-                                    *ngIf="loginForm.controls.email.errors && loginForm.controls.email.touched">
-                                    <p class="mb-0" *ngIf="loginForm.get('email')?.getError('required')">Email Is
-                                        Required
-                                    </p>
-                                    <p class="mb-0" *ngIf="loginForm.get('email')?.getError('email')">Email Is Invalid
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-column md:flex-row gap-3 my-2">
-                                <div class="p-inputgroup ">
-                                    <span class="p-inputgroup-addon">
-                                        <i class="pi pi-lock"></i>
-                                    </span>
-                                    <input pInputText formControlName="password" placeholder="Password" name="password"
-                                        [type]="hidePassword?'password':'text'" />
-                                    <span class="p-inputgroup-addon cursor" (click)="hidePassword =! hidePassword">
-                                        <i class="fa-regular" [class]="hidePassword?'fa-eye-slash':'fa-eye'"></i>
-                                    </span>
-                                </div>
-                                <div class="alert alert-danger p-2 m-0"
-                                    *ngIf="loginForm.controls.password.errors && loginForm.controls.password.touched">
-                                    <p class="mb-0" *ngIf="loginForm.get('password')?.getError('required')">
-                                        Password Is Required</p>
-                                    <p class="mb-0" *ngIf="loginForm.get('password')?.getError('pattern')">Please
-                                        must have A,a ,%,$,# .. From 8 , 16</p>
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-between my-2">
-                                <a class="text-mainColor text-decoration-none cursor"
-                                    routerLink="/auth/register">Register Now?</a>
-                                <a class="text-secondColor text-decoration-none cursor" (click)="showDialog()">Forgot
-                                    Password?</a>
-                            </div>
-                            <button class="btn bg-secondColor text-white w-100" [disabled]="loginForm.invalid"
-                                *ngIf="isLoading==false">Login</button>
-
-                            <button class="btn bg-secondColor text-white w-100" *ngIf="isLoading==true">
-                                <i class="fa fa-refresh fa-spin"></i> Loading...
-                            </button>
-                        </form>
-                    </div>
-                </div>
+  <div class="food-content">
+    <div class="container food-box">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card rounded-3 p-4">
+            <div class="text-center">
+              <img
+                src="../../../../../assets/images/logo.svg"
+                class="w-50 mb-3"
+                alt=""
+              />
             </div>
+            <h2 class="mb-0">login</h2>
+            <p class="text-mainCOlor">
+              Welcome Back! Please enter your details
+            </p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmitForm(loginForm)">
+              <div class="flex flex-column md:flex-row gap-2">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                    <i class="pi pi-user"></i>
+                  </span>
+                  <input
+                    pInputText
+                    formControlName="email"
+                    placeholder="Username"
+                    name="username"
+                  />
+                </div>
+                <div
+                  class="alert alert-danger p-2 m-0"
+                  *ngIf="
+                    loginForm.controls.email.errors &&
+                    loginForm.controls.email.touched
+                  "
+                >
+                  <p
+                    class="mb-0"
+                    *ngIf="loginForm.get('email')?.getError('required')"
+                  >
+                    Email Is Required
+                  </p>
+                  <p
+                    class="mb-0"
+                    *ngIf="loginForm.get('email')?.getError('email')"
+                  >
+                    Email Is Invalid
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex flex-column md:flex-row gap-3 my-2">
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">
+                    <i class="pi pi-lock"></i>
+                  </span>
+                  <input
+                    pInputText
+                    formControlName="password"
+                    placeholder="Password"
+                    name="password"
+                    [type]="hidePassword ? 'password' : 'text'"
+                  />
+                  <span
+                    class="p-inputgroup-addon cursor"
+                    (click)="hidePassword = !hidePassword"
+                  >
+                    <i
+                      class="fa-regular"
+                      [class]="hidePassword ? 'fa-eye-slash' : 'fa-eye'"
+                    ></i>
+                  </span>
+                </div>
+                <div
+                  class="alert alert-danger p-2 m-0"
+                  *ngIf="
+                    loginForm.controls.password.errors &&
+                    loginForm.controls.password.touched
+                  "
+                >
+                  <p
+                    class="mb-0"
+                    *ngIf="loginForm.get('password')?.getError('required')"
+                  >
+                    Password Is Required
+                  </p>
+                  <p
+                    class="mb-0"
+                    *ngIf="loginForm.get('password')?.getError('pattern')"
+                  >
+                    Please must have A,a ,%,$,# .. From 8 , 16
+                  </p>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between my-2">
+                <a
+                  class="text-mainColor text-decoration-none cursor"
+                  routerLink="/auth/register"
+                  >Register Now?</a
+                >
+                <a
+                  class="text-secondColor text-decoration-none cursor"
+                  (click)="showDialog()"
+                  >Forgot Password?</a
+                >
+              </div>
+              <button
+                class="btn bg-secondColor text-white w-100"
+                [disabled]="loginForm.invalid"
+                *ngIf="isLoading == false"
+              >
+                Login
+              </button>
+
+              <button
+                class="btn bg-secondColor text-white w-100"
+                *ngIf="isLoading == true"
+              >
+                <i class="fa fa-refresh fa-spin"></i> Loading...
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- Forget Password -->
-<p-dialog header="Verify Account" [modal]="true" [(visible)]="visible" [style]="{ width: '30rem' }">
+<p-dialog
+  header="Verify Account"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '30rem' }"
+>
+  <div class="card flex justify-content-center">
+    <div class="rounded-3 p-2">
+      <div class="text-center">
+        <img
+          src="../../../../../assets/images/logo.svg"
+          class="w-25"
+          alt="logo"
+        />
+      </div>
+      <p class="text-mainColor">
+        No worries! Please enter your email and we will send a password reset
+        link
+      </p>
 
-    <div class="card flex justify-content-center">
-        <div class="rounded-3 p-2">
-            <div class="text-center">
-                <img src="../../../../../assets/images/logo.svg" class="w-25" alt="logo">
-            </div>
-            <p class="text-mainColor">No worries! Please enter your email and we will send a password reset
-                link</p>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="fa-regular fa-envelope"></i>
+        </span>
+        <input
+          pInputText
+          [(ngModel)]="email"
+          placeholder="Enter your E-mail"
+          name="E-mail"
+        />
+      </div>
+      <div class="text-end my-2">
+        <a
+          class="text-secondColor text-decoration-none cursor"
+          routerLink="/auth/reset-password"
+          >Have Code?</a
+        >
+      </div>
 
-            <div class="p-inputgroup">
-                <span class="p-inputgroup-addon">
-                    <i class="fa-regular fa-envelope"></i>
-                </span>
-                <input pInputText [(ngModel)]="email" placeholder="Enter your E-mail" name="E-mail" />
-            </div>
-            <div class="text-end my-2">
-                <a class="text-secondColor text-decoration-none cursor" routerLink="/auth/reset-password">Have
-                    Code?</a>
-            </div>
-
-            <button class="btn bg-secondColor text-white w-100" (click)="onForgetPassword(email)">Send</button>
-
-        </div>
+      <button
+        class="btn bg-secondColor text-white w-100"
+        (click)="onForgetPassword(email)"
+      >
+        Send
+      </button>
     </div>
+  </div>
 </p-dialog>
